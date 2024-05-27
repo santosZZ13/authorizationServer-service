@@ -11,7 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.*;
+import org.springframework.util.StringUtils;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -42,14 +44,30 @@ public class TokenConfiguration {
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
 		return context -> {
-			UserDetails principal = (UserDetails) context.getPrincipal().getPrincipal();
+			UserDetails userDetails = null;
+
+
+			if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
+				userDetails = (UserDetails) context.getPrincipal().getDetails();
+			} else if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
+				userDetails = (UserDetails) context.getPrincipal().getPrincipal();
+			} else {
+				throw new IllegalStateException("Unexpected token type");
+			}
+
+			if (!StringUtils.hasText(userDetails.getUsername())) {
+				throw new IllegalStateException("Bad UserDetails, username is empty");
+			}
 
 			context.getClaims()
 					.claim(
 							"authorities",
-							principal.getAuthorities().stream()
+							userDetails.getAuthorities().stream()
 									.map(GrantedAuthority::getAuthority)
 									.collect(Collectors.toSet())
+					)
+					.claim(
+							"username", userDetails.getUsername()
 					);
 		};
 	}

@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54f9827b-1a17-426a-899b-c9db5f752cb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/AuthorizationServerApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/SecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/TokenConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/AuthorizationGrantTypePassword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/properties/OAuth2ClientCustomProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/authorizationserver/AuthorizationServerApplicationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/CustomUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/GrantPasswordAuthenticationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/provider/GrantPasswordAuthenticationProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/util/OAuth2EndpointUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/AuthorizationServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/AuthorizationServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/TokenConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/TokenConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/AuthorizationGrantTypePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/AuthorizationGrantTypePassword.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +34,9 @@
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2gxTMYAsxrHqzH1Zs44cpuA8CW5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -61,6 +55,7 @@
     "Spring Boot.AuthorizationServerApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/nam.dinh/Desktop/PROJ/authorizationServer-service",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -106,26 +101,11 @@
       <option name="presentableId" value="Default" />
       <updated>1716638183069</updated>
       <workItem from="1716638184312" duration="9074000" />
+      <workItem from="1716773930822" duration="12199000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

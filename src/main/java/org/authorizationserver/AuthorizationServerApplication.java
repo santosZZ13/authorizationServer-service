@@ -9,5 +9,6 @@ import org.springframework.security.oauth2.server.authorization.web.OAuth2TokenE
 public class AuthorizationServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthorizationServerApplication.class, args);
+//		OAuth2TokenEndpointFilter
 	}
 }
