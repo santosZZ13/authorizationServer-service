@@ -3,7 +3,6 @@ package org.authorizationserver.config;
 import lombok.AllArgsConstructor;
 import org.authorizationserver.converter.OAuth2GrantPasswordAuthenticationConverter;
 import org.authorizationserver.model.AuthorizationGrantTypePassword;
-import org.authorizationserver.properties.OAuth2ClientCustomProperties;
 import org.authorizationserver.provider.GrantPasswordAuthenticationProvider;
 import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
 import org.springframework.context.annotation.Bean;
@@ -31,12 +30,13 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 
 import java.util.UUID;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
 public class AuthorizationServerConfiguration {
 
-	private final OAuth2ClientCustomProperties oAuth2ClientProperties;
 
 
 	@Bean
@@ -54,7 +54,8 @@ public class AuthorizationServerConfiguration {
 								.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
 								.authenticationProvider(grantPasswordAuthenticationProvider)
 //								.authenticationProvider(daoAuthenticationProvider)
-				);
+				)
+				.oidc(withDefaults()); // Enable OpenID Connect 1.0
 
 
 		httpSecurity

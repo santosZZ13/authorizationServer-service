@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54f9827b-1a17-426a-899b-c9db5f752cb3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/CustomUserDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/GrantPasswordAuthenticationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/provider/GrantPasswordAuthenticationProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/util/OAuth2EndpointUtils.java" afterDir="false" />
+    <list default="true" id="54f9827b-1a17-426a-899b-c9db5f752cb3" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/AuthorizationServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/AuthorizationServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/TokenConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/TokenConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/AuthorizationGrantTypePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/AuthorizationGrantTypePassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/properties/OAuth2ClientCustomProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/properties/OAuth2ClientCustomProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +50,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.AuthorizationServerApplication.executor": "Run",
+    "Spring Boot.AuthorizationServerApplication.executor": "Debug",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/nam.dinh/Desktop/PROJ/authorizationServer-service",
@@ -101,11 +99,35 @@
       <option name="presentableId" value="Default" />
       <updated>1716638183069</updated>
       <workItem from="1716638184312" duration="9074000" />
-      <workItem from="1716773930822" duration="12199000" />
+      <workItem from="1716773930822" duration="17276000" />
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1716791000007</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716791000007</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

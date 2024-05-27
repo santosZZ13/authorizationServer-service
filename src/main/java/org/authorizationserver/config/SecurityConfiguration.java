@@ -25,6 +25,7 @@ public class SecurityConfiguration {
 								.anyRequest().authenticated()
 				)
 				.formLogin(withDefaults())
+				.oauth2Login(withDefaults())
 				.logout(LogoutConfigurer::permitAll)
 				.build();
 	}
