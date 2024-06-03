@@ -1,4 +1,4 @@
-package org.authorizationserver.converter;
+package org.authorizationserver.security.converter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.authorizationserver.model.GrantPasswordAuthenticationToken;

@@ -10,7 +10,7 @@ spring:
   #    allow-bean-definition-overriding: true
 
   datasource:
-    url: jdbc:mysql://localhost:3306/gateway?allowpublickeyretrieval=true&usessl=false
+    url: jdbc:mysql://localhost:3306/sso?allowpublickeyretrieval=true&usessl=false
     username: root
     password: A%9jr>NK
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -35,11 +35,11 @@ spring:
           google:
             clientId: 773619103626-c457k0qqgip96ej65846p61j6ij47fcs.apps.googleusercontent.com
             clientSecret: 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
-            redirectUri: "http://localhost:8080/oauth2/callback/google"
+            redirectUri: http://localhost:8081/login/oauth2/code/google
             #            client-authentication-method: basic
             #            provider: google
 #            scope:
-#              #              - openid  #if add, loadUser will not execute
+              #              - openid  #if add, loadUser will not execute
 #              - profile
 #              - email
             #              - https://www.googleapis.com/auth/userinfo.email

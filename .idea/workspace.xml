@@ -5,13 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54f9827b-1a17-426a-899b-c9db5f752cb3" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/mapper/GoogleOidcUserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/mapper/OidcUserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/CustomOidcUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/entity/Authority.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/entity/BaseEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/persistent/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/security/handler/SocialLoginAuthenticationSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/security/handler/UserServiceOAuth2UserHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/CustomOidcUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/CustomUserDetailsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/AuthorizationServerConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/properties/OAuth2ClientCustomProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/properties/OAuth2ClientCustomProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/converter/OAuth2GrantPasswordAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/security/converter/OAuth2GrantPasswordAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/CustomUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/model/CustomUserDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/provider/GrantPasswordAuthenticationProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/security/provider/GrantPasswordAuthenticationProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +42,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -31,6 +52,9 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -50,7 +74,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.AuthorizationServerApplication.executor": "Debug",
+    "Spring Boot.AuthorizationServerApplication.executor": "Run",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/nam.dinh/Desktop/PROJ/authorizationServer-service",
@@ -60,8 +84,22 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.authorizationserver.persistent.repository" />
+      <recent name="org.authorizationserver.service.impl" />
+      <recent name="org.authorizationserver.service" />
+      <recent name="org.authorizationserver.persistent.entity" />
+      <recent name="org.authorizationserver.model" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="AuthorizationServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="authorizationServer-service" />
@@ -123,11 +161,52 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="21" />
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-core/6.1.3/spring-security-oauth2-core-6.1.3-sources.jar!/org/springframework/security/oauth2/core/oidc/StandardClaimAccessor.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-client/6.1.3/spring-security-oauth2-client-6.1.3-sources.jar!/org/springframework/security/oauth2/client/oidc/authentication/OidcAuthorizationCodeAuthenticationProvider.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/mapper/GoogleOidcUserMapper.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/security/handler/UserServiceOAuth2UserHandler.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/security/handler/SocialLoginAuthenticationSuccessHandler.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/CustomOidcUserService.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/mapper/GoogleOidcUserMapper.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/security/handler/UserServiceOAuth2UserHandler.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.security.oauth2.core.oidc.OidcIdToken" memberName="claims" />
+        <PinnedItemInfo parentTag="org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser" memberName="authorities" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

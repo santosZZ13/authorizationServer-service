@@ -1,15 +1,13 @@
 package org.authorizationserver.config;
 
 import lombok.AllArgsConstructor;
-import org.authorizationserver.converter.OAuth2GrantPasswordAuthenticationConverter;
+import org.authorizationserver.security.converter.OAuth2GrantPasswordAuthenticationConverter;
 import org.authorizationserver.model.AuthorizationGrantTypePassword;
-import org.authorizationserver.provider.GrantPasswordAuthenticationProvider;
-import org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties;
+import org.authorizationserver.security.provider.GrantPasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
