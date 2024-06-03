@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,9 +22,14 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity implements Serializable {
+	//	@Id
+//	@UuidGenerator(style = UuidGenerator.Style.AUTO)
+//	@Column(name = "id", updatable = false, nullable = false)
 	@Id
-	@UuidGenerator(style = UuidGenerator.Style.TIME)
-	@Column(name = "id", updatable = false, nullable = false)
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "id", columnDefinition = "char(36)")
+	@JdbcTypeCode(SqlTypes.VARCHAR)
 	private UUID id;
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
