@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2Token;
@@ -28,12 +29,14 @@ public class TokenConfiguration {
 
 	@Bean
 	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(JWKSource<SecurityContext> jwkSource,
-																	  OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer
+//																	  OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer,
+																	  OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer
 	) {
 		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
 		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
-		jwtGenerator.setJwtCustomizer(jwtTokenCustomizer);
+//		jwtGenerator.setJwtCustomizer(jwtTokenCustomizer);
 		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+		accessTokenGenerator.setAccessTokenCustomizer(accessTokenCustomizer);
 		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
 
 		return new DelegatingOAuth2TokenGenerator(
@@ -42,7 +45,7 @@ public class TokenConfiguration {
 	}
 
 	@Bean
-	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
+	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> jwtTokenCustomizer() {
 		return context -> {
 			UserDetails userDetails = null;
 
@@ -50,6 +53,8 @@ public class TokenConfiguration {
 			if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
 				userDetails = (UserDetails) context.getPrincipal().getDetails();
 			} else if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
+				userDetails = (UserDetails) context.getPrincipal().getPrincipal();
+			} else if (context.getPrincipal() instanceof AbstractAuthenticationToken) {
 				userDetails = (UserDetails) context.getPrincipal().getPrincipal();
 			} else {
 				throw new IllegalStateException("Unexpected token type");

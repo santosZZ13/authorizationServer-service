@@ -2,6 +2,8 @@ package org.authorizationserver.config;
 
 import org.authorizationserver.security.handler.SocialLoginAuthenticationSuccessHandler;
 import org.authorizationserver.security.handler.UserServiceOAuth2UserHandler;
+import org.authorizationserver.service.UserService;
+import org.authorizationserver.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,5 +43,17 @@ public class SecurityConfiguration {
 		SocialLoginAuthenticationSuccessHandler authenticationSuccessHandler = new SocialLoginAuthenticationSuccessHandler();
 		authenticationSuccessHandler.setOidcUserHandler(handler);
 		return authenticationSuccessHandler;
+	}
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails user = User.builder()
+				.username("admin")
+				// {noop} means "no operation," i.e., a raw password without any encoding applied.
+				.password("{noop}secret")
+				.roles("ADMIN")
+				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
+				.build();
+		return new InMemoryUserDetailsManager(user);
 	}
 }

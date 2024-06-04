@@ -22,10 +22,13 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+import java.time.Duration;
 import java.util.UUID;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -34,7 +37,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
 public class AuthorizationServerConfiguration {
-
 
 
 	@Bean
@@ -48,9 +50,9 @@ public class AuthorizationServerConfiguration {
 
 		httpSecurity.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
 				.tokenEndpoint(tokenEndpoint ->
-						tokenEndpoint
-								.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
-								.authenticationProvider(grantPasswordAuthenticationProvider)
+								tokenEndpoint
+										.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
+										.authenticationProvider(grantPasswordAuthenticationProvider)
 //								.authenticationProvider(daoAuthenticationProvider)
 				)
 				.oidc(withDefaults()); // Enable OpenID Connect 1.0
@@ -77,7 +79,7 @@ public class AuthorizationServerConfiguration {
 			OAuth2AuthorizationService authorizationService
 
 	) {
-		return new GrantPasswordAuthenticationProvider(userDetailsService,passwordEncoder,jwtTokenCustomizer, authorizationService);
+		return new GrantPasswordAuthenticationProvider(userDetailsService, passwordEncoder, jwtTokenCustomizer, authorizationService);
 	}
 
 	@Bean
@@ -95,7 +97,6 @@ public class AuthorizationServerConfiguration {
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
 		return daoAuthenticationProvider;
 	}
-
 
 
 	@Bean
@@ -117,6 +118,15 @@ public class AuthorizationServerConfiguration {
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 				.authorizationGrantType(AuthorizationGrantTypePassword.GRANT_PASSWORD)
+				.tokenSettings(
+						TokenSettings.builder()
+								.accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+								.accessTokenTimeToLive(Duration.ofMinutes(300))
+								.refreshTokenTimeToLive(Duration.ofMinutes(600))
+								.authorizationCodeTimeToLive(Duration.ofMinutes(20))
+								.reuseRefreshTokens(false)
+								.build()
+				)
 				.build();
 
 		return new InMemoryRegisteredClientRepository(demoClient);
