@@ -55,8 +55,34 @@ public class AuthorizationServerConfiguration {
 										.authenticationProvider(grantPasswordAuthenticationProvider)
 //								.authenticationProvider(daoAuthenticationProvider)
 				)
-				.oidc(withDefaults()); // Enable OpenID Connect 1.0
-
+				.oidc(withDefaults()) // Enable OpenID Connect 1.0
+//		.registeredClientRepository()
+//				.authorizationService(authorizationService())
+//		.authorizationConsentService()
+//		.authorizationServerSettings()
+//				.tokenGenerator()
+//				.clientAuthentication(clientAuthentication ->
+//						clientAuthentication
+//								.authenticationConverter(authenticationConverter)
+//								.authenticationConverters(authenticationConvertersConsumer)
+//								.authenticationProvider(authenticationProvider)
+//								.authenticationProviders(authenticationProvidersConsumer)
+//								.authenticationSuccessHandler(authenticationSuccessHandler)
+//								.errorResponseHandler(errorResponseHandler)
+//				)
+				.authorizationEndpoint(authorizationEndpoint -> { })
+				.deviceAuthorizationEndpoint(deviceAuthorizationEndpoint -> { })
+				.deviceVerificationEndpoint(deviceVerificationEndpoint -> { })
+				.tokenEndpoint(tokenEndpoint -> { })
+				.tokenIntrospectionEndpoint(tokenIntrospectionEndpoint -> { })
+				.tokenRevocationEndpoint(tokenRevocationEndpoint -> { })
+				.authorizationServerMetadataEndpoint(authorizationServerMetadataEndpoint -> { })
+				.oidc(oidc -> oidc
+						.providerConfigurationEndpoint(providerConfigurationEndpoint -> { })
+						.logoutEndpoint(logoutEndpoint -> { })
+						.userInfoEndpoint(userInfoEndpoint -> { })
+						.clientRegistrationEndpoint(clientRegistrationEndpoint -> { })
+				);
 
 		httpSecurity
 				.exceptionHandling(
