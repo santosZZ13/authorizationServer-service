@@ -7,8 +7,6 @@ import org.authorizationserver.model.AuthorizationGrantTypePassword;
 import org.authorizationserver.persistent.entity.Client;
 import org.authorizationserver.persistent.repository.ClientRepository;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -19,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,11 +32,31 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 	@Override
 	public void save(RegisteredClient registeredClient) {
 		Assert.notNull(registeredClient, "registeredClient cannot be null");
-		this.clientRepository.save(toClient(registeredClient));
+		this.clientRepository.save(toClientEntity(registeredClient));
 	}
 
-	private Client toClient(RegisteredClient registeredClient) {
-		return null;
+	private Client toClientEntity(RegisteredClient registeredClient) {
+		List<String> clientAuthenticationMethods = new ArrayList<>(registeredClient.getClientAuthenticationMethods().size());
+		registeredClient.getClientAuthenticationMethods()
+				.forEach(clientAuthenticationMethod -> clientAuthenticationMethods.add(clientAuthenticationMethod.getValue()));
+		List<String> authorizationGrantTypes = new ArrayList<>(registeredClient.getAuthorizationGrantTypes().size());
+		registeredClient.getAuthorizationGrantTypes().forEach(authorizationGrantType ->
+				authorizationGrantTypes.add(authorizationGrantType.getValue()));
+		Client client = new Client();
+		client.setId(registeredClient.getId());
+		client.setClientId(registeredClient.getClientId());
+		client.setClientIdIssuedAt(registeredClient.getClientIdIssuedAt());
+		client.setClientName(registeredClient.getClientName());
+		client.setClientSecret(registeredClient.getClientSecret());
+		client.setClientSecretExpiresAt(registeredClient.getClientSecretExpiresAt());
+		client.setClientAuthenticationMethods(StringUtils.collectionToCommaDelimitedString(clientAuthenticationMethods));
+		client.setAuthorizationGrantTypes(StringUtils.collectionToCommaDelimitedString(authorizationGrantTypes));
+		client.setRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getRedirectUris()));
+		client.setPostLogoutRedirectUris(StringUtils.collectionToCommaDelimitedString(registeredClient.getPostLogoutRedirectUris()));
+		client.setScopes(StringUtils.collectionToCommaDelimitedString(registeredClient.getScopes()));
+		client.setClientSettings(writeMap(registeredClient.getClientSettings().getSettings()));
+		client.setTokenSettings(writeMap(registeredClient.getTokenSettings().getSettings()));
+		return client;
 	}
 
 
@@ -60,11 +80,11 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 		Set<String> postLogoutRedirectUris = StringUtils.commaDelimitedListToSet(client.getPostLogoutRedirectUris());
 		Set<String> clientScopes = StringUtils.commaDelimitedListToSet(client.getScopes());
 
-		Map<String, Object> clientSettingsMap = parseMap(client.getClientSettings());
-		Map<String, Object> tokenSettingsMap = parseMap(client.getTokenSettings());
+		Map<String, Object> clientSettingsMap = client.getClientSettings().equals("null") ? ClientSettings.builder().build().getSettings() : parseMap(client.getClientSettings());
+		Map<String, Object> tokenSettingsMap = client.getTokenSettings().equals("null") ? TokenSettings.builder().build().getSettings() : parseMap(client.getTokenSettings());
 
 
-		return RegisteredClient.withId(client.getClientId())
+		return RegisteredClient.withId(client.getId())
 				.clientName(client.getClientName())
 				.clientId(client.getClientId())
 				.clientSecret(client.getClientSecret())

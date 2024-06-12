@@ -33,7 +33,9 @@ public class SecurityConfiguration {
 				.formLogin(withDefaults())
 				.oauth2Login(oauth ->
 						oauth
-								.successHandler(authenticationSuccessHandler))
+								.successHandler(authenticationSuccessHandler)
+//								.failureHandler((request, response, exception) -> response.sendRedirect("/login?error"))
+				)
 				.logout(LogoutConfigurer::permitAll)
 				.build();
 	}

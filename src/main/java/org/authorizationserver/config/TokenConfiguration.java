@@ -28,16 +28,21 @@ public class TokenConfiguration {
 
 
 	@Bean
-	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(JWKSource<SecurityContext> jwkSource,
-//																	  OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer,
-																	  OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer
+	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(
+			JWKSource<SecurityContext> jwkSource,
+			OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer
 	) {
 		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
 		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
+
 //		jwtGenerator.setJwtCustomizer(jwtTokenCustomizer);
+
 		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
 		accessTokenGenerator.setAccessTokenCustomizer(accessTokenCustomizer);
 		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+
+//		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+//		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
 
 		return new DelegatingOAuth2TokenGenerator(
 				jwtGenerator, accessTokenGenerator, refreshTokenGenerator

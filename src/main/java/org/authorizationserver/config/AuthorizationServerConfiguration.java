@@ -144,15 +144,15 @@ public class AuthorizationServerConfiguration {
 //				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 //				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //				.authorizationGrantType(AuthorizationGrantTypePassword.GRANT_PASSWORD)
-//				.tokenSettings(
-//						TokenSettings.builder()
-//								.accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-//								.accessTokenTimeToLive(Duration.ofMinutes(300))
-//								.refreshTokenTimeToLive(Duration.ofMinutes(600))
-//								.authorizationCodeTimeToLive(Duration.ofMinutes(20))
-//								.reuseRefreshTokens(false)
-//								.build()
-//				)
+////				.tokenSettings(
+////						TokenSettings.builder()
+////								.accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+////								.accessTokenTimeToLive(Duration.ofMinutes(300))
+////								.refreshTokenTimeToLive(Duration.ofMinutes(600))
+////								.authorizationCodeTimeToLive(Duration.ofMinutes(20))
+////								.reuseRefreshTokens(false)
+////								.build()
+////				)
 //				.build();
 //
 //		return new InMemoryRegisteredClientRepository(demoClient);

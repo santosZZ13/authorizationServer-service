@@ -4,7 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
@@ -12,6 +14,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "`client`")
 @Data
+@NoArgsConstructor
 public class Client {
 	@Id
 	private String id;
