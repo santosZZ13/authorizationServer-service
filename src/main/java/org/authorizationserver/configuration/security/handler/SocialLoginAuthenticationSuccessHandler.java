@@ -1,4 +1,4 @@
-package org.authorizationserver.security.handler;
+package org.authorizationserver.configuration.security.handler;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

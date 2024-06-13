@@ -1,4 +1,4 @@
-package org.authorizationserver.security.provider;
+package org.authorizationserver.configuration.security.provider;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

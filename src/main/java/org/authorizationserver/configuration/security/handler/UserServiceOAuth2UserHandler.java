@@ -1,4 +1,4 @@
-package org.authorizationserver.security.handler;
+package org.authorizationserver.configuration.security.handler;
 
 import lombok.RequiredArgsConstructor;
 import org.authorizationserver.model.CustomOidcUser;

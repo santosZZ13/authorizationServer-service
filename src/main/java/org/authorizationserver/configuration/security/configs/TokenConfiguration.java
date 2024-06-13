@@ -1,4 +1,4 @@
-package org.authorizationserver.config;
+package org.authorizationserver.configuration.security.configs;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -30,8 +30,8 @@ public class TokenConfiguration {
 	@Bean
 	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(
 			JWKSource<SecurityContext> jwkSource,
-			OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer
-	) {
+			OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer) {
+
 		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
 		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
 
@@ -84,14 +84,7 @@ public class TokenConfiguration {
 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource() {
-		KeyPair keyPair = generateRsaKey();
-		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-		RSAKey rsaKey = new RSAKey.Builder(publicKey)
-				.privateKey(privateKey)
-				.keyID(UUID.randomUUID().toString())
-				.build();
-		JWKSet jwkSet = new JWKSet(rsaKey);
+		JWKSet jwkSet = new JWKSet(generateRsa());
 		return new ImmutableJWKSet<>(jwkSet);
 	}
 
@@ -106,4 +99,16 @@ public class TokenConfiguration {
 		}
 		return keyPair;
 	}
+
+
+	private static RSAKey generateRsa() {
+		KeyPair keyPair = generateRsaKey();
+		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+		return new RSAKey.Builder(publicKey)
+				.privateKey(privateKey)
+				.keyID(UUID.randomUUID().toString())
+				.build();
+	}
+
 }

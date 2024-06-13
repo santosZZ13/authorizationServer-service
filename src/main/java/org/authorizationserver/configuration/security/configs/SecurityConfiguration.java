@@ -1,9 +1,7 @@
-package org.authorizationserver.config;
+package org.authorizationserver.configuration.security.configs;
 
-import org.authorizationserver.security.handler.SocialLoginAuthenticationSuccessHandler;
-import org.authorizationserver.security.handler.UserServiceOAuth2UserHandler;
-import org.authorizationserver.service.UserService;
-import org.authorizationserver.service.impl.CustomUserDetailsService;
+import org.authorizationserver.configuration.security.handler.SocialLoginAuthenticationSuccessHandler;
+import org.authorizationserver.configuration.security.handler.UserServiceOAuth2UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

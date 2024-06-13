@@ -1,10 +1,9 @@
-package org.authorizationserver.config;
+package org.authorizationserver.configuration.security.configs;
 
 import lombok.AllArgsConstructor;
-import org.authorizationserver.security.converter.OAuth2GrantPasswordAuthenticationConverter;
-import org.authorizationserver.security.provider.GrantPasswordAuthenticationProvider;
-import org.authorizationserver.security.repository.JpaRegisteredClientRepository;
-import org.authorizationserver.security.service.JpaOAuth2AuthorizationService;
+import org.authorizationserver.configuration.security.provider.GrantPasswordAuthenticationProvider;
+import org.authorizationserver.configuration.security.repository.JpaRegisteredClientRepository;
+import org.authorizationserver.configuration.security.service.JpaOAuth2AuthorizationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -22,7 +21,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 
@@ -30,30 +28,30 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @AllArgsConstructor
 public class AuthorizationServerConfiguration {
 
+	private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
+
 
 	@Bean
 	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public SecurityFilterChain authorizationSecurityFilterChain(
 			HttpSecurity httpSecurity,
 			GrantPasswordAuthenticationProvider grantPasswordAuthenticationProvider,
-			JpaOAuth2AuthorizationService  jpaOAuth2AuthorizationService,
+			JpaOAuth2AuthorizationService jpaOAuth2AuthorizationService,
 			JpaRegisteredClientRepository jpaRegisteredClientRepository
 	) throws Exception {
 
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(httpSecurity);
+		AuthorizationEndpointConfigure.configureTokenEndpoint(httpSecurity, grantPasswordAuthenticationProvider);
+		AuthorizationEndpointConfigure.configureAuthorizationEndpoint(httpSecurity);
+		AuthorizationEndpointConfigure.configureDeviceAuthorizationEndpoint(httpSecurity);
+		AuthorizationEndpointConfigure.configureDeviceVerificationEndpoint(httpSecurity);
+		AuthorizationEndpointConfigure.configureTokenIntrospectionEndpoint(httpSecurity);
+		AuthorizationEndpointConfigure.configureTokenRevocationEndpoint(httpSecurity);
+		AuthorizationEndpointConfigure.configureAuthorizationServerMetadataEndpoint(httpSecurity);
 
 		httpSecurity.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-				.tokenEndpoint(tokenEndpoint ->
-								tokenEndpoint
-										.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
-										.authenticationProvider(grantPasswordAuthenticationProvider)
-//								.authenticationProvider(daoAuthenticationProvider)
-				)
-				.oidc(withDefaults()) // Enable OpenID Connect 1.0
-//		.registeredClientRepository()
-//				.authorizationService(authorizationService())
-//		.authorizationConsentService()
-//		.authorizationServerSettings()
+//				.authorizationConsentService()
+//				.authorizationServerSettings()
 //				.tokenGenerator()
 //				.clientAuthentication(clientAuthentication ->
 //						clientAuthentication
@@ -64,28 +62,16 @@ public class AuthorizationServerConfiguration {
 //								.authenticationSuccessHandler(authenticationSuccessHandler)
 //								.errorResponseHandler(errorResponseHandler)
 //				)
-				/*
-				 * OAuth 2.0 Authorization Service Configuration
-				 */
 				.authorizationService(jpaOAuth2AuthorizationService)
-				/*
-				 * OAuth 2.0 Registered Client Repository
-				 */
 				.registeredClientRepository(jpaRegisteredClientRepository)
-
-				.authorizationEndpoint(authorizationEndpoint -> { })
-				.deviceAuthorizationEndpoint(deviceAuthorizationEndpoint -> { })
-				.deviceVerificationEndpoint(deviceVerificationEndpoint -> { })
-				.tokenEndpoint(tokenEndpoint -> { })
-				.tokenIntrospectionEndpoint(tokenIntrospectionEndpoint -> { })
-				.tokenRevocationEndpoint(tokenRevocationEndpoint -> { })
-				.authorizationServerMetadataEndpoint(authorizationServerMetadataEndpoint -> { })
+				.oidc(withDefaults())
 				.oidc(oidc -> oidc
-						.providerConfigurationEndpoint(providerConfigurationEndpoint -> { })
-						.logoutEndpoint(logoutEndpoint -> { })
-						.userInfoEndpoint(userInfoEndpoint -> { })
-						.clientRegistrationEndpoint(clientRegistrationEndpoint -> { })
+						.providerConfigurationEndpoint(providerConfigurationEndpoint -> {})
+						.logoutEndpoint(logoutEndpoint -> {})
+						.userInfoEndpoint(userInfoEndpoint -> {})
+						.clientRegistrationEndpoint(clientRegistrationEndpoint -> {})
 				);
+
 
 		httpSecurity
 				.exceptionHandling(
@@ -98,6 +84,21 @@ public class AuthorizationServerConfiguration {
 
 		return httpSecurity.build();
 	}
+
+
+//	private void configureOiDc(OAuth2AuthorizationServerConfigurer oAuth2AuthorizationServerConfigurer) {
+//		oAuth2AuthorizationServerConfigurer.oidc(oidc -> oidc
+//				.providerConfigurationEndpoint(providerConfigurationEndpoint -> {
+//				})
+//				.logoutEndpoint(logoutEndpoint -> {
+//				})
+//				.userInfoEndpoint(userInfoEndpoint -> {
+//				})
+//				.clientRegistrationEndpoint(clientRegistrationEndpoint -> {
+//				})
+//		);
+//	}
+
 
 
 	@Bean

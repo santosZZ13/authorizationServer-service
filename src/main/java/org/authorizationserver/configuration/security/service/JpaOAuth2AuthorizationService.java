@@ -1,4 +1,4 @@
-package org.authorizationserver.security.service;
+package org.authorizationserver.configuration.security.service;
 
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;

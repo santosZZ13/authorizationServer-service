@@ -1,4 +1,4 @@
-package org.authorizationserver.security.repository;
+package org.authorizationserver.configuration.security.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

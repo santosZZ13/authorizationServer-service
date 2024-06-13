@@ -6,6 +6,7 @@ import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2Au
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2TokenIntrospectionAuthenticationProvider;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter;
 import org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
 
@@ -20,5 +21,6 @@ public class AuthorizationServerApplication {
 //		RegisteredClientRepository
 //		JdbcOAuth2AuthorizationService
 //		OAuth2TokenIntrospectionAuthenticationProvider
+//		OAuth2AuthorizationEndpointFilter
 	}
 }
