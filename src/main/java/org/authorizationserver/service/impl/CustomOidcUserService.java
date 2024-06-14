@@ -2,7 +2,7 @@ package org.authorizationserver.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.authorizationserver.mapper.OidcUserMapper;
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.authorizationserver.service.UserService;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
@@ -28,10 +28,10 @@ public class CustomOidcUserService extends OidcUserService {
 
 		OidcUserMapper oidcUserMapper = mappers.get(registrationId);
 		String email = userRequest.getIdToken().getEmail();
-		User localUser = userService.getUserByEmail(email);
+		UserEntity localUserEntity = userService.getUserByEmail(email);
 
-		if (localUser != null) {
-			return oidcUserMapper.map(oidcUser.getIdToken(), oidcUser.getUserInfo(), localUser);
+		if (localUserEntity != null) {
+			return oidcUserMapper.map(oidcUser.getIdToken(), oidcUser.getUserInfo(), localUserEntity);
 		}
 
 		//Map unregistered user

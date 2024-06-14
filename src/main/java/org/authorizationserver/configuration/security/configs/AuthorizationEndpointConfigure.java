@@ -1,8 +1,6 @@
 package org.authorizationserver.configuration.security.configs;
 
 import org.authorizationserver.configuration.security.converter.OAuth2GrantPasswordAuthenticationConverter;
-import org.authorizationserver.configuration.security.handler.TokenEndpointSuccessFailure;
-import org.authorizationserver.configuration.security.handler.TokenEndpointSuccessHandler;
 import org.authorizationserver.configuration.security.provider.GrantPasswordAuthenticationProvider;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,8 +19,8 @@ public class AuthorizationEndpointConfigure {
 						tokenEndpoint
 								.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
 								.authenticationProvider(grantPasswordAuthenticationProvider)
-								.accessTokenResponseHandler(new TokenEndpointSuccessHandler())
-								.errorResponseHandler(new TokenEndpointSuccessFailure())
+//								.accessTokenResponseHandler(new TokenEndpointSuccessHandler())
+//								.errorResponseHandler(new TokenEndpointSuccessFailure())
 				);
 	}
 

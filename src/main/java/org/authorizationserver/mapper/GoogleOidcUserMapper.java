@@ -1,7 +1,7 @@
 package org.authorizationserver.mapper;
 
 import org.authorizationserver.model.CustomOidcUser;
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -27,8 +27,8 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 	}
 
 	@Override
-	public OidcUser map(OidcIdToken idToken, OidcUserInfo userInfo, User user) {
-		Set<GrantedAuthority> authorities = user.getRoles().stream()
+	public OidcUser map(OidcIdToken idToken, OidcUserInfo userInfo, UserEntity userEntity) {
+		Set<GrantedAuthority> authorities = userEntity.getRoles().stream()
 				.flatMap(role -> role.getAuthorities().stream()
 						.map(authority -> new SimpleGrantedAuthority(authority.getName()))
 				)
@@ -36,12 +36,12 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 
 
 		Map<String, Object> claims = new HashMap<>(idToken.getClaims());
-		claims.put(StandardClaimNames.GIVEN_NAME, user.getFirstName());
+		claims.put(StandardClaimNames.GIVEN_NAME, userEntity.getFirstName());
 //		claims.put(StandardClaimNames.MIDDLE_NAME, user.getMiddleName());
-		claims.put(StandardClaimNames.FAMILY_NAME, user.getLastName());
-		claims.put(StandardClaimNames.LOCALE, user.getLocale());
-		claims.put(StandardClaimNames.PICTURE, user.getAvatarUrl());
-		claims.put(StandardClaimNames.EMAIL, user.getEmail());
+		claims.put(StandardClaimNames.FAMILY_NAME, userEntity.getLastName());
+		claims.put(StandardClaimNames.LOCALE, userEntity.getLocale());
+		claims.put(StandardClaimNames.PICTURE, userEntity.getAvatarUrl());
+		claims.put(StandardClaimNames.EMAIL, userEntity.getEmail());
 
 
 		OidcIdToken customIdToken = new OidcIdToken(
@@ -49,10 +49,10 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 		);
 
 		CustomOidcUser oidcUser = new CustomOidcUser(authorities, customIdToken, userInfo);
-		oidcUser.setId(user.getId());
-		oidcUser.setUsername(user.getEmail());
-		oidcUser.setCreatedAt(user.getCreatedDate());
-		oidcUser.setActive(user.isEnable());
+		oidcUser.setId(userEntity.getId());
+		oidcUser.setUsername(userEntity.getEmail());
+		oidcUser.setCreatedAt(userEntity.getCreatedDate());
+		oidcUser.setActive(userEntity.isEnable());
 		return oidcUser;
 	}
 }

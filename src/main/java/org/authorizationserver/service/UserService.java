@@ -1,8 +1,8 @@
 package org.authorizationserver.service;
 
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 
 public interface UserService {
-	User getUserByEmail(String email);
-	User save(User user);
+	UserEntity getUserByEmail(String email);
+	UserEntity save(UserEntity userEntity);
 }

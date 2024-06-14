@@ -1,7 +1,7 @@
 package org.authorizationserver.service.impl;
 
 import lombok.AllArgsConstructor;
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.authorizationserver.model.CustomUserDetails;
 import org.authorizationserver.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +21,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		User userByEmail = userService.getUserByEmail(username);
+		UserEntity userEntityByEmail = userService.getUserByEmail(username);
 
-		if (Objects.isNull(userByEmail)) {
+		if (Objects.isNull(userEntityByEmail)) {
 			throw new UsernameNotFoundException("Unable to found user: " + username);
 		}
 
-		return new CustomUserDetails(userByEmail);
+		return new CustomUserDetails(userEntityByEmail);
 	}
 }

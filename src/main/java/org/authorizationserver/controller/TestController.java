@@ -1,7 +1,7 @@
 package org.authorizationserver.controller;
 
 import lombok.AllArgsConstructor;
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.authorizationserver.persistent.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +15,7 @@ public class TestController {
 	private final UserRepository userRepository;
 
 	@GetMapping("/foo")
-	public Iterable<User> foo() {
+	public Iterable<UserEntity> foo() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.findAll();
 	}

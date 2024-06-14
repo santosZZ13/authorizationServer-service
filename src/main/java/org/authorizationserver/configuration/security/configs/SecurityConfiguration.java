@@ -45,15 +45,15 @@ public class SecurityConfiguration {
 		return authenticationSuccessHandler;
 	}
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user = User.builder()
-				.username("admin")
-				// {noop} means "no operation," i.e., a raw password without any encoding applied.
-				.password("{noop}secret")
-				.roles("ADMIN")
-				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
-				.build();
-		return new InMemoryUserDetailsManager(user);
-	}
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//		UserDetails user = User.builder()
+//				.username("admin")
+//				// {noop} means "no operation," i.e., a raw password without any encoding applied.
+//				.password("{noop}secret")
+//				.roles("ADMIN")
+//				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
+//				.build();
+//		return new InMemoryUserDetailsManager(user);
+//	}
 }

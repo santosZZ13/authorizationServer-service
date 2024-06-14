@@ -2,7 +2,7 @@ package org.authorizationserver.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.authorizationserver.persistent.entity.User;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,8 +81,8 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 		return this.authorities;
 	}
 
-	public User toInstantUser() {
-		return User.builder()
+	public UserEntity toInstantUser() {
+		return UserEntity.builder()
 				.email(getEmail())
 				.firstName(getGivenName())
 				.lastName(getFamilyName())
