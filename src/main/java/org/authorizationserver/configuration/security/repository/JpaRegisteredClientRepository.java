@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.authorizationserver.model.AuthorizationGrantTypePassword;
 import org.authorizationserver.persistent.entity.Client;
 import org.authorizationserver.persistent.repository.ClientRepository;
+import org.authorizationserver.util.OauthResolver;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -27,7 +28,7 @@ import java.util.Set;
 public class JpaRegisteredClientRepository implements RegisteredClientRepository {
 
 	private final ClientRepository clientRepository;
-	private final ObjectMapper objectMapper = new ObjectMapper();
+	private final ObjectMapper objectMapper;
 
 	@Override
 	public void save(RegisteredClient registeredClient) {
@@ -92,9 +93,9 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 				.clientSecretExpiresAt(client.getClientSecretExpiresAt())
 				.clientAuthenticationMethods(authenticationMethods ->
 						clientAuthenticationMethods.forEach(authenticationMethod ->
-								authenticationMethods.add(resolveClientAuthenticationMethod(authenticationMethod))))
+								authenticationMethods.add(OauthResolver.resolveClientAuthenticationMethod(authenticationMethod))))
 				.authorizationGrantTypes(grantTypes ->
-						authorizationGrantTypes.forEach(authorizationGrantType -> grantTypes.add(resolveAuthorizationGrantType(authorizationGrantType))))
+						authorizationGrantTypes.forEach(authorizationGrantType -> grantTypes.add(OauthResolver.resolveAuthorizationGrantType(authorizationGrantType))))
 				.redirectUris((uris) -> uris.addAll(redirectUris))
 				.postLogoutRedirectUris((uris) -> uris.addAll(postLogoutRedirectUris))
 				.scopes((scopes) -> scopes.addAll(clientScopes))
@@ -103,29 +104,7 @@ public class JpaRegisteredClientRepository implements RegisteredClientRepository
 				.build();
 	}
 
-	private AuthorizationGrantType resolveAuthorizationGrantType(String authorizationGrantType) {
-		if (AuthorizationGrantType.AUTHORIZATION_CODE.getValue().equals(authorizationGrantType)) {
-			return AuthorizationGrantType.AUTHORIZATION_CODE;
-		} else if (AuthorizationGrantType.CLIENT_CREDENTIALS.getValue().equals(authorizationGrantType)) {
-			return AuthorizationGrantType.CLIENT_CREDENTIALS;
-		} else if (AuthorizationGrantType.REFRESH_TOKEN.getValue().equals(authorizationGrantType)) {
-			return AuthorizationGrantType.REFRESH_TOKEN;
-		} else if (AuthorizationGrantTypePassword.GRANT_PASSWORD.getValue().equals(authorizationGrantType)) {
-			return AuthorizationGrantTypePassword.GRANT_PASSWORD;
-		}
-		return new AuthorizationGrantType(authorizationGrantType);
-	}
 
-	private ClientAuthenticationMethod resolveClientAuthenticationMethod(String clientAuthenticationMethod) {
-		if (ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue().equals(clientAuthenticationMethod)) {
-			return ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
-		} else if (ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue().equals(clientAuthenticationMethod)) {
-			return ClientAuthenticationMethod.CLIENT_SECRET_POST;
-		} else if (ClientAuthenticationMethod.NONE.getValue().equals(clientAuthenticationMethod)) {
-			return ClientAuthenticationMethod.NONE;
-		}
-		return new ClientAuthenticationMethod(clientAuthenticationMethod);
-	}
 
 
 	private Map<String, Object> parseMap(String data) {
