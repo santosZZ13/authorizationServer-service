@@ -4,6 +4,7 @@ import org.authorizationserver.configuration.security.handler.SocialLoginAuthent
 import org.authorizationserver.configuration.security.handler.UserServiceOAuth2UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
@@ -25,13 +26,17 @@ public class SecurityConfiguration {
 														  AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
 		return http
 				.authorizeHttpRequests(
-						authorize -> authorize
-								.anyRequest().authenticated()
-				)
+						(authorizeRequests ) -> authorizeRequests
+								.requestMatchers("/oauth2/**").permitAll()
+								.requestMatchers("/login").permitAll()
+								.requestMatchers(HttpMethod.GET, "/foo").permitAll()
+								.requestMatchers(HttpMethod.POST, "/foo").permitAll()
+								.requestMatchers( "/client").permitAll()
+								.anyRequest().authenticated())
 				.formLogin(withDefaults())
 				.oauth2Login(oauth ->
-						oauth
-								.successHandler(authenticationSuccessHandler)
+								oauth
+										.successHandler(authenticationSuccessHandler)
 //								.failureHandler((request, response, exception) -> response.sendRedirect("/login?error"))
 				)
 				.logout(LogoutConfigurer::permitAll)

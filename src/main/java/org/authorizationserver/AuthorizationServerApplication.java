@@ -9,12 +9,14 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter;
 import org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 @SpringBootApplication
 
 public class AuthorizationServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthorizationServerApplication.class, args);
+//		FilterSecurityInterceptor
 //		OAuth2TokenEndpointFilter
 //		BearerTokenAuthenticationFilter
 //		InMemoryOAuth2AuthorizationService

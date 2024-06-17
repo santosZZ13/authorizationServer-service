@@ -49,6 +49,13 @@ public class AuthorizationServerConfiguration {
 		AuthorizationEndpointConfigure.configureTokenRevocationEndpoint(httpSecurity);
 		AuthorizationEndpointConfigure.configureAuthorizationServerMetadataEndpoint(httpSecurity);
 
+//		httpSecurity.authorizeHttpRequests(
+//				(request) -> request
+//						.requestMatchers("/api/private/client").permitAll()
+////						.anyRequest().authenticated()
+//		);
+
+
 		httpSecurity.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
 //				.authorizationConsentService()
 //				.authorizationServerSettings()

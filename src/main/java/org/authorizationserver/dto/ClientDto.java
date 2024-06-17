@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Map;
 
 /**
  * DTO for {@link org.authorizationserver.persistent.entity.Client}
@@ -22,6 +23,6 @@ public class ClientDto implements Serializable {
 	String redirectUris;
 	String postLogoutRedirectUris;
 	String scopes;
-	String clientSettings;
-	String tokenSettings;
+	Map<String, Object> clientSettings;
+	Map<String, Object> tokenSettings;
 }
