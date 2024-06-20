@@ -25,6 +25,7 @@ public class SecurityConfiguration {
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
 														  AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
 		return http
+				.csrf().disable()
 				.authorizeHttpRequests(
 						(authorizeRequests ) -> authorizeRequests
 								.requestMatchers("/oauth2/**").permitAll()

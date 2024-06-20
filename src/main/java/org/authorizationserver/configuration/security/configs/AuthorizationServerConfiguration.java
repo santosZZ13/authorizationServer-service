@@ -1,9 +1,11 @@
 package org.authorizationserver.configuration.security.configs;
 
+import com.nimbusds.jose.JWSAlgorithm;
 import lombok.AllArgsConstructor;
 import org.authorizationserver.configuration.security.provider.GrantPasswordAuthenticationProvider;
 import org.authorizationserver.configuration.security.repository.JpaRegisteredClientRepository;
 import org.authorizationserver.configuration.security.service.JpaOAuth2AuthorizationService;
+import org.authorizationserver.model.AuthorizationGrantTypePassword;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -13,13 +15,21 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+
+import java.util.UUID;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -164,7 +174,14 @@ public class AuthorizationServerConfiguration {
 ////								.reuseRefreshTokens(false)
 ////								.build()
 ////				)
-//				.build();
+////				.clientSettings(
+////						ClientSettings.builder()
+////								.requireProofKey(true)
+////								.requireAuthorizationConsent(true)
+////								.jwkSetUrl("http://localhost:8080/jwk")
+////								.tokenEndpointAuthenticationSigningAlgorithm(JWSAlgorithm.RS256.getName())
+////								.build()
+//				.build());
 //
 //		return new InMemoryRegisteredClientRepository(demoClient);
 //	}
