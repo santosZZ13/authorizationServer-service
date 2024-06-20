@@ -5,8 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.authorizationserver.validation.ValidAuthorizationCodeTimeToLive;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
+import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Map;
 
@@ -42,6 +46,7 @@ public class ClientDto implements Serializable {
 	 * Default:
 	 */
 	private String authorizationGrantTypes;
+
 	private String redirectUris;
 	private String postLogoutRedirectUris;
 	private String scopes;
@@ -54,32 +59,55 @@ public class ClientDto implements Serializable {
 	@AllArgsConstructor
 	public static class ClientSetting {
 		@JsonProperty("require-proof-key")
-		private String requireProofKey;
+		private Boolean requireProofKey;
 		@JsonProperty("require-authorization-consent")
-		private String requireAuthorizationConsent;
+		private Boolean requireAuthorizationConsent;
 		@JsonProperty("jwk-set-url")
 		private String jwkSetUrl;
 		@JsonProperty("token-endpoint-authentication-signing-algorithm")
 		private String tokenEndpointAuthenticationSigningAlgorithm;
 	}
 
+	//				.authorizationCodeTimeToLive(Duration.ofMinutes(5))
+//			.accessTokenTimeToLive(Duration.ofMinutes(5))
+//			.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+//				.deviceCodeTimeToLive(Duration.ofMinutes(5))
+//			.reuseRefreshTokens(true)
+//				.refreshTokenTimeToLive(Duration.ofMinutes(60))
+//			.idTokenSignatureAlgorithm(SignatureAlgorithm.RS256);
 	@Data
 	@Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class TokenSetting {
 		@JsonProperty("authorization-code-time-to-live")
-		private String authorizationCodeTimeToLive;
+		@ValidAuthorizationCodeTimeToLive
+		private Integer authorizationCodeTimeToLive;
 		@JsonProperty("access-token-time-to-live")
-		private String accessTokenTimeToLive;
+		private Integer accessTokenTimeToLive;
+		/**
+		 * <p>self-contained</p>
+		 * <p>reference</p>
+		 */
 		@JsonProperty("access-token-format")
 		private String accessTokenFormat;
 		@JsonProperty("device-code-time-to-live")
-		private String deviceCodeTimeToLive;
+		private Integer deviceCodeTimeToLive;
 		@JsonProperty("reuse-refresh-tokens")
-		private String reuseRefreshTokens;
+		private Boolean reuseRefreshTokens;
 		@JsonProperty("refresh-token-time-to-live")
-		private String refreshTokenTimeToLive;
+		private Integer refreshTokenTimeToLive;
+		/**
+		 * <p>RS256</p>
+		 * <p>RS384</p>
+		 * <p>RS512</p>
+		 * <p>ES256</p>
+		 * <p>ES384</p>
+		 * <p>ES512</p>
+		 * <p>PS256</p>
+		 * <p>PS384</p>
+		 * <p>PS512</p>
+		 */
 		@JsonProperty("id-token-signature-algorithm")
 		private String idTokenSignatureAlgorithm;
 	}
