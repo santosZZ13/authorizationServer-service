@@ -1,18 +1,17 @@
-package org.authorizationserver.dto;
+package org.authorizationserver.dto.clientdto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.authorizationserver.validation.ValidAuthorizationCodeTimeToLive;
-import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
-import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
+import org.authorizationserver.validation.ValidField;
 
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.Instant;
-import java.util.Map;
 
 /**
  * DTO for {@link org.authorizationserver.persistent.entity.Client}
@@ -22,10 +21,16 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDto implements Serializable {
+
+	@Nullable
 	private String clientName;
+	@NotNull
 	private String clientId;
+	@ValidField(message = "Mandatory field {%s} is not specified", code = "C1010003")
 	private String clientSecret;
+	@Nullable
 	private Instant clientIdIssuedAt;
+	@Nullable
 	private Instant clientSecretExpiresAt;
 	/**
 	 * <p>client_secret_basic</p>
@@ -35,6 +40,7 @@ public class ClientDto implements Serializable {
 	 * <p>none</p>
 	 * Default:
 	 */
+	@Nullable
 	private String clientAuthenticationMethods;
 	/**
 	 * <p>authorization_code</p>
@@ -45,12 +51,19 @@ public class ClientDto implements Serializable {
 	 * <p>urn:ietf:params:oauth:grant-type:device_code</p>
 	 * Default:
 	 */
+	@ValidField(message = "Mandatory field {%s} is not specified", code = "C1010003")
 	private String authorizationGrantTypes;
 
+	@Nullable
 	private String redirectUris;
+	@Nullable
 	private String postLogoutRedirectUris;
+
+	@Nullable
 	private String scopes;
+	@Nullable
 	private ClientSetting clientSettings;
+	@Nullable
 	private TokenSetting tokenSettings;
 
 	@Data
