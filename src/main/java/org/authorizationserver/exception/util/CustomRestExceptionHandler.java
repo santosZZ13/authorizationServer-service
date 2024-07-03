@@ -1,4 +1,4 @@
-package org.authorizationserver.exception;
+package org.authorizationserver.exception.util;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -16,8 +17,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+
 @ControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
+
+
+	@ExceptionHandler({ Exception.class })
+	public ResponseEntity<Object> handAll(@NotNull Exception ex, WebRequest request) {
+		ResponseError responseError = ResponseError.builder()
+				.httpStatus(INTERNAL_SERVER_ERROR)
+				.code("")
+				.shortDesc(ex.getMessage())
+				.message(ex.getMessage())
+				.build();
+		return new ResponseEntity<>(responseError, new HttpHeaders(), responseError.getHttpStatus());
+	}
+
+
+	@ExceptionHandler({ApiException.class})
+	public ResponseEntity<Object> handlerApiException(@NotNull ApiException ex, WebRequest request) {
+		final String code = ex.getCode();
+		final String shortDesc = ex.getShortDesc();
+		final String message = ex.getMessage();
+		ResponseError responseError = ResponseError.builder()
+				.code(code)
+				.shortDesc(shortDesc)
+				.message(message)
+				.httpStatus(HttpStatus.BAD_REQUEST)
+				.build();
+		return new ResponseEntity<>(GenericResponseSuccessWrapper.builder()
+				.success(Boolean.FALSE)
+				.data(responseError)
+				.build(), new HttpHeaders(), BAD_REQUEST);
+	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(@NotNull MethodArgumentNotValidException ex,
@@ -36,12 +70,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 			fieldErrorWrappers.add(fieldErrorWrapper);
 		});
 
-		return ResponseEntity.badRequest().body(GenericResponseErrorWrapper
+		ResponseEntity<GenericResponseErrorWrapper> validationFailed = ResponseEntity.badRequest().body(GenericResponseErrorWrapper
 				.builder()
 				.errors(fieldErrorWrappers)
 				.message("Validation failed")
-				.status(HttpStatus.BAD_REQUEST)
 				.build());
+
+		return new ResponseEntity<>(validationFailed, new HttpHeaders(), BAD_REQUEST);
 	}
 
 	private String getErrorCode(Object[] arguments) {

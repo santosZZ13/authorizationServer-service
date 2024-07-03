@@ -1,8 +1,7 @@
 package org.authorizationserver.service;
 
 import org.authorizationserver.dto.clientdto.ClientDTORequest;
-import org.authorizationserver.dto.clientdto.ClientDto;
-import org.authorizationserver.exception.GenericResponseSuccessWrapper;
+import org.authorizationserver.exception.util.GenericResponseSuccessWrapper;
 
 public interface JpaRegisteredClientService {
 	GenericResponseSuccessWrapper createClient(ClientDTORequest clientDTORequest);

@@ -12,6 +12,7 @@ import org.authorizationserver.validation.ValidField;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * DTO for {@link org.authorizationserver.persistent.entity.Client}
@@ -20,16 +21,19 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDto implements Serializable {
+public class ClientDTO implements Serializable {
 
 	@Nullable
 	private String clientName;
-	@NotNull
-	private String clientId;
+
 	@ValidField(message = "Mandatory field {%s} is not specified", code = "C1010003")
+	private String clientId;
+
 	private String clientSecret;
+
 	@Nullable
 	private Instant clientIdIssuedAt;
+
 	@Nullable
 	private Instant clientSecretExpiresAt;
 	/**
@@ -41,7 +45,7 @@ public class ClientDto implements Serializable {
 	 * Default:
 	 */
 	@Nullable
-	private String clientAuthenticationMethods;
+	private List<String> clientAuthenticationMethods;
 	/**
 	 * <p>authorization_code</p>
 	 * <p>refresh_token</p>
@@ -52,15 +56,17 @@ public class ClientDto implements Serializable {
 	 * Default:
 	 */
 	@ValidField(message = "Mandatory field {%s} is not specified", code = "C1010003")
-	private String authorizationGrantTypes;
+	private List<String> authorizationGrantTypes;
 
 	@Nullable
-	private String redirectUris;
-	@Nullable
-	private String postLogoutRedirectUris;
+	private List<String> redirectUris;
 
 	@Nullable
-	private String scopes;
+	private List<String> postLogoutRedirectUris;
+
+	@Nullable
+	private List<String> scopes;
+
 	@Nullable
 	private ClientSetting clientSettings;
 	@Nullable

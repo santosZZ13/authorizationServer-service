@@ -9,5 +9,5 @@ import lombok.*;
 @NoArgsConstructor
 public class ClientDTORequest {
 	@Valid
-	private ClientDto client;
+	private ClientDTO client;
 }
