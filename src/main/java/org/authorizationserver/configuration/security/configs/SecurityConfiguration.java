@@ -69,31 +69,31 @@ public class SecurityConfiguration {
 								.requestMatchers("/client").permitAll()
 								.anyRequest().authenticated())
 				.formLogin(withDefaults())
-				.formLogin(formLogin ->
-						formLogin
-								.loginPage("http://localhost:3000/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
-								.loginProcessingUrl("/api/login") // Endpoint xử lý login
-								.usernameParameter("email") // Sử dụng email làm username
-								.passwordParameter("password")
-								.successHandler((request, response, authentication) -> {
-									// Trả về response JSON khi login thành công
-//									response.setStatus(HttpServletResponse.SC_OK);
+//				.formLogin(formLogin ->
+//						formLogin
+//								.loginPage("http://localhost:3000/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
+//								.loginProcessingUrl("/api/login") // Endpoint xử lý login
+//								.usernameParameter("email") // Sử dụng email làm username
+//								.passwordParameter("password")
+//								.successHandler((request, response, authentication) -> {
+//									// Trả về response JSON khi login thành công
+////									response.setStatus(HttpServletResponse.SC_OK);
+////									response.setContentType("application/json");
+////									response.getWriter().write("{\"status\": \"success\", \"message\": \"Login successful\"}");
+////									response.sendRedirect("http://localhost:3000");/**/
+//									// process the default success handler
+////									 defaultSuccessHandler.onAuthenticationSuccess(request, response, authentication);
+//									// process the custom success handler
+//									authenticationSuccessHandler.onAuthenticationSuccess(request, response, authentication);
+//								})
+//								.failureHandler((request, response, exception) -> {
+//									// Trả về response JSON khi login thất bại
+//									response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //									response.setContentType("application/json");
-//									response.getWriter().write("{\"status\": \"success\", \"message\": \"Login successful\"}");
-//									response.sendRedirect("http://localhost:3000");/**/
-									// process the default success handler
-//									 defaultSuccessHandler.onAuthenticationSuccess(request, response, authentication);
-									// process the custom success handler
-									authenticationSuccessHandler.onAuthenticationSuccess(request, response, authentication);
-								})
-								.failureHandler((request, response, exception) -> {
-									// Trả về response JSON khi login thất bại
-									response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-									response.setContentType("application/json");
-									response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid email or password\"}");
-								})
-								.permitAll()
-				)
+//									response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid email or password\"}");
+//								})
+//								.permitAll()
+//				)
 				.addFilterBefore(new GenericFilter() {
 					@Override
 					public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
