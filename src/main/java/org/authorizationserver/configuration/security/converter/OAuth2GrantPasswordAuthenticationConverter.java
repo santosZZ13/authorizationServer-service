@@ -1,7 +1,7 @@
 package org.authorizationserver.configuration.security.converter;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.authorizationserver.model.GrantPasswordAuthenticationToken;
+import org.authorizationserver.configuration.security.model.GrantPasswordAuthenticationToken;
 import org.authorizationserver.util.OAuth2EndpointUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.authorizationserver.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
+import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
 public class OAuth2GrantPasswordAuthenticationConverter implements AuthenticationConverter {
 	@Override
@@ -52,8 +52,7 @@ public class OAuth2GrantPasswordAuthenticationConverter implements Authenticatio
 
 		Set<String> requestedScopes = null;
 		if (StringUtils.hasText(scope)) {
-			requestedScopes = new HashSet<>(
-					Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
+			requestedScopes = new HashSet<>(Arrays.asList(StringUtils.delimitedListToStringArray(scope, " ")));
 		}
 
 
@@ -67,9 +66,7 @@ public class OAuth2GrantPasswordAuthenticationConverter implements Authenticatio
 		Authentication clientPrincipal = SecurityContextHolder.getContext().getAuthentication();
 
 
-		return new GrantPasswordAuthenticationToken(
-				clientPrincipal, username, password, requestedScopes, additionalParameters
-		);
+		return new GrantPasswordAuthenticationToken(clientPrincipal, username, password, requestedScopes, additionalParameters);
 	}
 
 

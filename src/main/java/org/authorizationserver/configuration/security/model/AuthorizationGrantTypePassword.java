@@ -1,4 +1,4 @@
-package org.authorizationserver.model;
+package org.authorizationserver.configuration.security.model;
 
 
 import org.springframework.security.oauth2.core.AuthorizationGrantType;

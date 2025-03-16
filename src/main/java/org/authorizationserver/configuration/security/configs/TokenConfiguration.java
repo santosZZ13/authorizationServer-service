@@ -23,42 +23,32 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * For token generation settings.
+ */
 @Configuration(proxyBeanMethods = false)
 public class TokenConfiguration {
 
-
 	@Bean
-	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(
-			JWKSource<SecurityContext> jwkSource,
-			OAuth2TokenCustomizer<OAuth2TokenClaimsContext> accessTokenCustomizer) {
-
-		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
-		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
-
-//		jwtGenerator.setJwtCustomizer(jwtTokenCustomizer);
-
-		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-		accessTokenGenerator.setAccessTokenCustomizer(accessTokenCustomizer);
-		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-
-//		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-//		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-
-		return new DelegatingOAuth2TokenGenerator(
-				jwtGenerator, accessTokenGenerator, refreshTokenGenerator
-		);
+	public JWKSource<SecurityContext> jwkSource() {
+		KeyPair keyPair = generateRsaKey();
+		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+		RSAKey rsaKey = new RSAKey.Builder(publicKey)
+				.privateKey(privateKey)
+				.keyID(UUID.randomUUID().toString())
+				.build();
+		JWKSet jwkSet = new JWKSet(rsaKey);
+		return new ImmutableJWKSet<>(jwkSet);
 	}
 
 	@Bean
-	public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> jwtTokenCustomizer() {
+	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
 		return context -> {
 			UserDetails userDetails = null;
 
-
 			if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
 				userDetails = (UserDetails) context.getPrincipal().getDetails();
-			} else if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
-				userDetails = (UserDetails) context.getPrincipal().getPrincipal();
 			} else if (context.getPrincipal() instanceof AbstractAuthenticationToken) {
 				userDetails = (UserDetails) context.getPrincipal().getPrincipal();
 			} else {
@@ -83,9 +73,15 @@ public class TokenConfiguration {
 	}
 
 	@Bean
-	public JWKSource<SecurityContext> jwkSource() {
-		JWKSet jwkSet = new JWKSet(generateRsa());
-		return new ImmutableJWKSet<>(jwkSet);
+	public OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator(JWKSource<SecurityContext> jwkSource,
+																	  OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer
+	) {
+		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource);
+		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
+		jwtGenerator.setJwtCustomizer(jwtTokenCustomizer);
+		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+		return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
 	}
 
 	private static KeyPair generateRsaKey() {
@@ -99,16 +95,4 @@ public class TokenConfiguration {
 		}
 		return keyPair;
 	}
-
-
-	private static RSAKey generateRsa() {
-		KeyPair keyPair = generateRsaKey();
-		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-		return new RSAKey.Builder(publicKey)
-				.privateKey(privateKey)
-				.keyID(UUID.randomUUID().toString())
-				.build();
-	}
-
 }

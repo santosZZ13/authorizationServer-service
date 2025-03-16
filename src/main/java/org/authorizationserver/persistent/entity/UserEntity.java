@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
@@ -14,20 +15,19 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity(name = "user")
-@Table(name = "user")
+@Entity(name = "User")
+@Table(name = "app_user")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity extends BaseEntity implements Serializable {
-	//	@Id
-//	@UuidGenerator(style = UuidGenerator.Style.AUTO)
-//	@Column(name = "id", updatable = false, nullable = false)
+public class UserEntity  implements Serializable {
+//	@GeneratedValue(generator = "UUID")
+//	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+//	@Column(name = "id", columnDefinition = "char(36)")
+//	@JdbcTypeCode(SqlTypes.VARCHAR)
 	@Id
-	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "id", columnDefinition = "char(36)")
-	@JdbcTypeCode(SqlTypes.VARCHAR)
+	@UuidGenerator(style = UuidGenerator.Style.TIME)
+	@Column(name = "id", updatable = false, nullable = false)
 	private UUID id;
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;

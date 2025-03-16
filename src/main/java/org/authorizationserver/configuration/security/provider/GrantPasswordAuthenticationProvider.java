@@ -3,7 +3,7 @@ package org.authorizationserver.configuration.security.provider;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.authorizationserver.model.CustomUserDetails;
-import org.authorizationserver.model.GrantPasswordAuthenticationToken;
+import org.authorizationserver.configuration.security.model.GrantPasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 import java.security.Principal;
 import java.util.Objects;
 
-import static org.authorizationserver.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
+import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
 public class GrantPasswordAuthenticationProvider implements AuthenticationProvider {
 	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
