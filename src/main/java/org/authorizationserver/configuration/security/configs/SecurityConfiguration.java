@@ -63,8 +63,8 @@ public class SecurityConfiguration {
 						(authorizeRequests) -> authorizeRequests
 								.requestMatchers("/oauth2/**").permitAll()
 								.requestMatchers("/main.css").permitAll()
-								.requestMatchers("/index").permitAll()
 								.requestMatchers("/login").permitAll()
+								.requestMatchers("/signup").permitAll()
 								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
 								.requestMatchers(HttpMethod.GET, "/foo").permitAll()
 								.requestMatchers(HttpMethod.POST, "/foo").permitAll()
@@ -72,9 +72,9 @@ public class SecurityConfiguration {
 								.anyRequest().authenticated())
 				.formLogin(withDefaults())
 				.formLogin(formLogin ->
-						formLogin
-								.loginPage("/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
-								.permitAll()
+								formLogin
+										.loginPage("/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
+										.permitAll()
 //								.loginProcessingUrl("/api/login") // Endpoint xử lý login
 //								.usernameParameter("email") // Sử dụng email làm username
 //								.passwordParameter("password")
@@ -95,8 +95,15 @@ public class SecurityConfiguration {
 //									response.setContentType("application/json");
 //									response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid email or password\"}");
 //								})
-								.permitAll()
+										.permitAll()
 				)
+//				.logout(logout -> logout
+//						.logoutUrl("/logout")
+//						.invalidateHttpSession(true)
+//						.deleteCookies("JSESSIONID")
+//						.permitAll()
+//				)
+				.logout(LogoutConfigurer::permitAll)
 				.addFilterBefore(new GenericFilter() {
 					@Override
 					public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -169,7 +176,7 @@ public class SecurityConfiguration {
 					OAuth2ParameterNames.STATE,
 					UriUtils.encode(authorizationCodeRequestAuthentication.getState(), StandardCharsets.UTF_8));
 		}
-		String redirectUri = uriBuilder.build(true).toUriString();		// build(true) -> Components are explicitly encoded
+		String redirectUri = uriBuilder.build(true).toUriString();        // build(true) -> Components are explicitly encoded
 		this.redirectStrategy.sendRedirect(request, response, redirectUri);
 	}
 
