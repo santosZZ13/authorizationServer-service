@@ -21,7 +21,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/register")
-	public String register(@RequestParam("firstName") String firstName,
+	public RegisterDto.Response register(@RequestParam("firstName") String firstName,
 						   @RequestParam("lastName") String lastName,
 						   @RequestParam("email") String email,
 						   @RequestParam("password") String password,
