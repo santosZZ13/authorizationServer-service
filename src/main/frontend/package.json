@@ -1,0 +1,20 @@
+{
+  "name": "authorizationserver",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./styles.css -o ../resources/static/main.css",
+    "watch": "npx tailwindcss --watch -i ./styles.css -o ../resources/static/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.14"
+  }
+}

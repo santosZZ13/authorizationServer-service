@@ -10,7 +10,12 @@ spring:
     #        web-application-type: none
   #    allow-bean-definition-overriding: true
 
-
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
 
   datasource:
     url: jdbc:postgresql://localhost:5442/demosso

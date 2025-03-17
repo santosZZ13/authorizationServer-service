@@ -62,6 +62,8 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(
 						(authorizeRequests) -> authorizeRequests
 								.requestMatchers("/oauth2/**").permitAll()
+								.requestMatchers("/main.css").permitAll()
+								.requestMatchers("/index").permitAll()
 								.requestMatchers("/login").permitAll()
 								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
 								.requestMatchers(HttpMethod.GET, "/foo").permitAll()
@@ -69,9 +71,10 @@ public class SecurityConfiguration {
 								.requestMatchers("/client").permitAll()
 								.anyRequest().authenticated())
 				.formLogin(withDefaults())
-//				.formLogin(formLogin ->
-//						formLogin
-//								.loginPage("http://localhost:3000/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
+				.formLogin(formLogin ->
+						formLogin
+								.loginPage("/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
+								.permitAll()
 //								.loginProcessingUrl("/api/login") // Endpoint xử lý login
 //								.usernameParameter("email") // Sử dụng email làm username
 //								.passwordParameter("password")
@@ -86,14 +89,14 @@ public class SecurityConfiguration {
 //									// process the custom success handler
 //									authenticationSuccessHandler.onAuthenticationSuccess(request, response, authentication);
 //								})
-//								.failureHandler((request, response, exception) -> {
+////								.failureHandler((request, response, exception) -> {
 //									// Trả về response JSON khi login thất bại
 //									response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //									response.setContentType("application/json");
 //									response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid email or password\"}");
 //								})
-//								.permitAll()
-//				)
+								.permitAll()
+				)
 				.addFilterBefore(new GenericFilter() {
 					@Override
 					public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -128,6 +131,19 @@ public class SecurityConfiguration {
 //		authenticationSuccessHandler.setOidcUserHandler(handler);
 //		return authenticationSuccessHandler;
 //	}
+
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails user = User.builder()
+				.username("admin")
+				// {noop} means "no operation," i.e., a raw password without any encoding applied.
+				.password("{noop}secret")
+				.roles("ADMIN")
+				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
+				.build();
+
+		return new InMemoryUserDetailsManager(user);
+	}
 
 	private CorsConfigurationSource corsConfigurationSource() {
 		return request -> {
