@@ -5,7 +5,7 @@
 //import org.authorizationserver.persistent.entity.Role;
 //import org.authorizationserver.persistent.entity.UserEntity;
 //import org.authorizationserver.service.RoleService;
-//import org.authorizationserver.service.UserService;
+//import org.authorizationserver.configuration.security.service.UserService;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 //import org.springframework.stereotype.Component;

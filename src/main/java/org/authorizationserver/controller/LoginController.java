@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ViewController {
+public class LoginController {
 
 	@GetMapping("/index")
 	public String home() {
@@ -13,11 +13,6 @@ public class ViewController {
 
 	@GetMapping("/login")
 	public String login() {
-		return "login";
-	}
-
-	@GetMapping("/signup")
-	public String customLogin() {
 		return "login";
 	}
 }

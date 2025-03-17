@@ -3,7 +3,7 @@
 //import lombok.RequiredArgsConstructor;
 //import org.authorizationserver.mapper.OidcUserMapper;
 //import org.authorizationserver.persistent.entity.UserEntity;
-//import org.authorizationserver.service.UserService;
+//import org.authorizationserver.configuration.security.service.UserService;
 //import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 //import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 //import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

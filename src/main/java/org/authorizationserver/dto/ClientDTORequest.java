@@ -1,4 +1,4 @@
-package org.authorizationserver.dto.clientdto;
+package org.authorizationserver.dto;
 
 import jakarta.validation.Valid;
 import lombok.*;

@@ -26,13 +26,11 @@ public class CustomUserDetails implements UserDetails {
 				.collect(Collectors.toList());
 	}
 
-	public CustomUserDetails(UserEntity userEntity) {
-		this.email = userEntity.getEmail();
-		this.password = userEntity.getPassword();
-		this.authorities = userEntity.getRoles().stream()
-				.flatMap(role -> role.getAuthorities().stream()
-						.map(authority -> new SimpleGrantedAuthority(authority.getName()))
-				)
+	public CustomUserDetails(UserModel userModel) {
+		this.email = userModel.getEmail();
+		this.password = userModel.getPassword();
+		this.authorities = userModel.getRoles().stream()
+				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 	}
 

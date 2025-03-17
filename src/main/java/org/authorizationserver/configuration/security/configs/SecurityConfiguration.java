@@ -65,16 +65,20 @@ public class SecurityConfiguration {
 								.requestMatchers("/main.css").permitAll()
 								.requestMatchers("/login").permitAll()
 								.requestMatchers("/signup").permitAll()
+								.requestMatchers("/register").permitAll()
 								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
 								.requestMatchers(HttpMethod.GET, "/foo").permitAll()
 								.requestMatchers(HttpMethod.POST, "/foo").permitAll()
 								.requestMatchers("/client").permitAll()
 								.anyRequest().authenticated())
-				.formLogin(withDefaults())
-				.formLogin(formLogin ->
-								formLogin
-										.loginPage("/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
-										.permitAll()
+//				.formLogin(withDefaults())
+				.formLogin(formLogin -> formLogin
+							.loginPage("/login")
+				)
+//				.formLogin(formLogin ->
+//								formLogin
+//										.loginPage("/login") // Đặt lại để chỉ định URL login tùy chỉnh (nếu bạn muốn redirect đến frontend)
+//										.permitAll()
 //								.loginProcessingUrl("/api/login") // Endpoint xử lý login
 //								.usernameParameter("email") // Sử dụng email làm username
 //								.passwordParameter("password")
@@ -95,8 +99,7 @@ public class SecurityConfiguration {
 //									response.setContentType("application/json");
 //									response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid email or password\"}");
 //								})
-										.permitAll()
-				)
+//				)
 //				.logout(logout -> logout
 //						.logoutUrl("/logout")
 //						.invalidateHttpSession(true)
@@ -139,18 +142,18 @@ public class SecurityConfiguration {
 //		return authenticationSuccessHandler;
 //	}
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		UserDetails user = User.builder()
-				.username("admin")
-				// {noop} means "no operation," i.e., a raw password without any encoding applied.
-				.password("{noop}secret")
-				.roles("ADMIN")
-				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
-				.build();
-
-		return new InMemoryUserDetailsManager(user);
-	}
+//	@Bean
+//	public UserDetailsService userDetailsService() {
+//		UserDetails user = User.builder()
+//				.username("admin")
+//				// {noop} means "no operation," i.e., a raw password without any encoding applied.
+//				.password("{noop}secret")
+//				.roles("ADMIN")
+//				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
+//				.build();
+//
+//		return new InMemoryUserDetailsManager(user);
+//	}
 
 	private CorsConfigurationSource corsConfigurationSource() {
 		return request -> {

@@ -1,4 +1,4 @@
-package org.authorizationserver.dto.clientdto;
+package org.authorizationserver.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
