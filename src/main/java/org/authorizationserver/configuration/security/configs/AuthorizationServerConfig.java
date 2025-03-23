@@ -1,6 +1,7 @@
 package org.authorizationserver.configuration.security.configs;
 
 import org.authorizationserver.configuration.security.converter.OAuth2GrantPasswordAuthenticationConverter;
+import org.authorizationserver.configuration.security.filter.CustomTokenEndpoint;
 import org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword;
 import org.authorizationserver.configuration.security.provider.GrantPasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +15,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationCodeRequestAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -25,13 +24,10 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,29 +41,41 @@ public class AuthorizationServerConfig {
 	public SecurityFilterChain authorizationSecurityFilterChain(
 			HttpSecurity http,
 			GrantPasswordAuthenticationProvider grantPasswordAuthenticationProvider,
-			DaoAuthenticationProvider daoAuthenticationProvider
+			DaoAuthenticationProvider daoAuthenticationProvider,
+			OAuth2AuthorizationService authorizationService,
+			CustomTokenEndpoint customTokenEndpoint
 	) throws Exception {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
 		http
 				.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-//				.authorizationEndpoint(authorizationEndpoint ->
-//						authorizationEndpoint
-//								.authorizationResponseHandler((request, response, authentication) -> {
-//									// Lấy thông tin từ authentication
-//									OAuth2AuthorizationCodeRequestAuthenticationToken authorization = (OAuth2AuthorizationCodeRequestAuthenticationToken) authentication;
-//									String code = Objects.requireNonNull(authorization.getAuthorizationCode()).getTokenValue();
-//									String redirectUri = authorization.getRedirectUri();
-//									String redirectUrl = redirectUri + "?code=" + code;
-//									response.sendRedirect(redirectUrl);
-//								})
-//				)
+				.authorizationEndpoint(authorizationEndpoint ->
+						authorizationEndpoint
+								.authorizationResponseHandler((request, response, authentication) -> {
+									// Lấy thông tin từ authentication
+									// This runs after the user has authenticated and approved the authorization request
+									// The authorization server will redirect the user to the client with an authorization code
+									OAuth2AuthorizationCodeRequestAuthenticationToken authorization = (OAuth2AuthorizationCodeRequestAuthenticationToken) authentication;
+									String code = Objects.requireNonNull(authorization.getAuthorizationCode()).getTokenValue();
+									String redirectUri = authorization.getRedirectUri();
+									String redirectUrl = redirectUri + "?code=" + code;
+									response.sendRedirect(redirectUrl);
+								})
+				)
 				.tokenEndpoint(tokenEndpoint ->
 						tokenEndpoint
 								.accessTokenRequestConverter(new OAuth2GrantPasswordAuthenticationConverter())
 								.authenticationProvider(grantPasswordAuthenticationProvider)
 								.authenticationProvider(daoAuthenticationProvider)
+								.accessTokenResponseHandler((request, response, authentication) -> {
+									try {
+										customTokenEndpoint.handleTokenResponse(response, authentication);
+									} catch (Exception e) {
+										throw new RuntimeException(e);
+									}
+								})
 				);
+//				.oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0;
 
 		// Nó redirect mày đến trang login (thường là /login, dựa trên cấu hình LoginUrlAuthenticationEntryPoint trong code của mày).
 		// Mày cần phải override nó để redirect mày đến trang login của mày.
@@ -105,41 +113,22 @@ public class AuthorizationServerConfig {
 				.build();
 	}
 
-	/**
-	 * Create a {@link DaoAuthenticationProvider} bean
-	 *
-	 * @param passwordEncoder    password encoder
-	 * @param userDetailsService user details service
-	 * @return a {@link DaoAuthenticationProvider} bean
-	 */
 
 	@Bean
-	public DaoAuthenticationProvider daoAuthenticationProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+	public DaoAuthenticationProvider daoAuthenticationProvider(PasswordEncoder passwordEncoder,
+															   UserDetailsService userDetailsService) {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(userDetailsService);
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
 		return daoAuthenticationProvider;
 	}
 
-	@Bean
-	public GrantPasswordAuthenticationProvider grantPasswordAuthenticationProvider(
-			UserDetailsService userDetailsService,
-			OAuth2TokenGenerator<?> oAuth2TokenGenerator,
-			OAuth2AuthorizationService authorizationService,
-			PasswordEncoder passwordEncoder) {
-		return new GrantPasswordAuthenticationProvider(
-				userDetailsService,
-				passwordEncoder,
-				oAuth2TokenGenerator,
-				authorizationService
-		);
-	}
 
 	@Bean
 	public OAuth2AuthorizationService authorizationService() {
 		return new InMemoryOAuth2AuthorizationService();
 	}
-//
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();

@@ -22,11 +22,11 @@ public class RegistrationController {
 
 	@PostMapping("/register")
 	public RegisterDto.Response register(@RequestParam("firstName") String firstName,
-						   @RequestParam("lastName") String lastName,
-						   @RequestParam("email") String email,
-						   @RequestParam("password") String password,
-						   @RequestParam("confirmPassword") String confirmPassword,
-						   Model model) {
+										 @RequestParam("lastName") String lastName,
+										 @RequestParam("email") String email,
+										 @RequestParam("password") String password,
+										 @RequestParam("confirmPassword") String confirmPassword,
+										 Model model) {
 		RegisterDto.Request request = RegisterDto.Request.builder()
 				.firstName(firstName)
 				.lastName(lastName)

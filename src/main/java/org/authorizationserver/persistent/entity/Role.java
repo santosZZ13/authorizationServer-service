@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Table(name="role")
+@Table(name = "role")
 @Entity
 public class Role implements Serializable {
 	@Id

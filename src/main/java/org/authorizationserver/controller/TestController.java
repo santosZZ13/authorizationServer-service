@@ -19,4 +19,5 @@ public class TestController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.findAll();
 	}
+
 }

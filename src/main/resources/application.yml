@@ -50,9 +50,10 @@ spring:
       client:
         registration:
           google:
-#            clientId: 773619103626-c457k0qqgip96ej65846p61j6ij47fcs.apps.googleusercontent.com
-#            clientSecret: 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
-#            redirectUri: http://localhost:8081/login/oauth2/code/google
+            provider: google
+            client-id: 773619103626-9bobjk5abiimhq9f58tddur80cm6tg1j.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: http://localhost:8002/login/oauth2/code/google
               #            client-authentication-method: basic
             #            provider: google
             #            scope:
@@ -64,11 +65,12 @@ spring:
             #              - openid
 #            client-name: google
 
+
         provider:
           google:
-#            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth # https://accounts.google.com/o/oauth2/auth
-#            token-uri: https://oauth2.googleapis.com/token # https://accounts.google.com/o/oauth2/token
-#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth # https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token # https://accounts.google.com/o/oauth2/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
 #            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
 #            user-name-attribute: sub
 

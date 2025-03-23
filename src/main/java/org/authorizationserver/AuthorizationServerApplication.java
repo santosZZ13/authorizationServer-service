@@ -19,7 +19,7 @@ public class AuthorizationServerApplication {
 //		JdbcOAuth2AuthorizationService
 //		OAuth2TokenIntrospectionAuthenticationProvider
 //		OAuth2AuthorizationEndpointFilter
-
+//		OidcUserService
 		;
 	}
 }

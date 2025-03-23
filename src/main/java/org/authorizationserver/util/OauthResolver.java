@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 
 public class OauthResolver {
-	public static  AuthorizationGrantType resolveAuthorizationGrantType(String authorizationGrantType) {
+	public static AuthorizationGrantType resolveAuthorizationGrantType(String authorizationGrantType) {
 		if (AuthorizationGrantType.AUTHORIZATION_CODE.getValue().equals(authorizationGrantType)) {
 			return AuthorizationGrantType.AUTHORIZATION_CODE;
 		} else if (AuthorizationGrantType.CLIENT_CREDENTIALS.getValue().equals(authorizationGrantType)) {
@@ -18,7 +18,7 @@ public class OauthResolver {
 		return new AuthorizationGrantType(authorizationGrantType);
 	}
 
-	public static  ClientAuthenticationMethod resolveClientAuthenticationMethod(String clientAuthenticationMethod) {
+	public static ClientAuthenticationMethod resolveClientAuthenticationMethod(String clientAuthenticationMethod) {
 		if (ClientAuthenticationMethod.CLIENT_SECRET_BASIC.getValue().equals(clientAuthenticationMethod)) {
 			return ClientAuthenticationMethod.CLIENT_SECRET_BASIC;
 		} else if (ClientAuthenticationMethod.CLIENT_SECRET_POST.getValue().equals(clientAuthenticationMethod)) {

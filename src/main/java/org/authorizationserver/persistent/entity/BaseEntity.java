@@ -22,7 +22,7 @@ public abstract class BaseEntity implements Serializable {
 
 	public static final String CREATOR_NAME = "auth-service";
 
-//	@Column(name = "created_by", nullable = false, length = 50)
+	//	@Column(name = "created_by", nullable = false, length = 50)
 	@Column(name = "created_by")
 	public String createdBy;
 

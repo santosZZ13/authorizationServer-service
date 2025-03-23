@@ -20,8 +20,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity  implements Serializable {
-//	@GeneratedValue(generator = "UUID")
+public class UserEntity implements Serializable {
+	//	@GeneratedValue(generator = "UUID")
 //	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //	@Column(name = "id", columnDefinition = "char(36)")
 //	@JdbcTypeCode(SqlTypes.VARCHAR)

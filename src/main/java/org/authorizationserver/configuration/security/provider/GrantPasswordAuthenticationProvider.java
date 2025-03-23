@@ -1,5 +1,6 @@
 package org.authorizationserver.configuration.security.provider;
 
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.authorizationserver.model.CustomUserDetails;
@@ -23,12 +24,15 @@ import org.springframework.security.oauth2.server.authorization.context.Authoriz
 import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
+import org.springframework.stereotype.Component;
 
 import java.security.Principal;
 import java.util.Objects;
 
 import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
+@Component
+@Log4j2
 public class GrantPasswordAuthenticationProvider implements AuthenticationProvider {
 	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
 	private final Log logger = LogFactory.getLog(getClass());
