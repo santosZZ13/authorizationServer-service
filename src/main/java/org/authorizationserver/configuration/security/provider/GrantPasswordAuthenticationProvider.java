@@ -3,7 +3,7 @@ package org.authorizationserver.configuration.security.provider;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.authorizationserver.model.CustomUserDetails;
+import org.authorizationserver.configuration.security.model.CustomUserDetails;
 import org.authorizationserver.configuration.security.model.GrantPasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;

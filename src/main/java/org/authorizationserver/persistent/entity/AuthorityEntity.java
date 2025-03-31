@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @Entity
 @Table(name = "authority")
-public class Authority implements Serializable {
+public class AuthorityEntity implements Serializable {
 
 	@Id
 	@Column(name = "id")

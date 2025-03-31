@@ -1,9 +1,7 @@
 package org.authorizationserver.configuration.security.mapper;
 
-import org.authorizationserver.model.CustomOidcUser;
+import org.authorizationserver.configuration.security.model.CustomOidcUser;
 import org.authorizationserver.model.UserModel;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.StandardClaimNames;
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component("google")
 public class GoogleOidcUserMapper implements OidcUserMapper {
@@ -43,9 +39,7 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 //		claims.put(StandardClaimNames.LOCALE, user.getLocale());
 //		claims.put(StandardClaimNames.PICTURE, user.getAvatarUrl());
 
-		OidcIdToken customIdToken = new OidcIdToken(
-				idToken.getTokenValue(), idToken.getIssuedAt(), idToken.getExpiresAt(), claims
-		);
+		OidcIdToken customIdToken = new OidcIdToken(idToken.getTokenValue(), idToken.getIssuedAt(), idToken.getExpiresAt(), claims);
 
 		CustomOidcUser oidcUser = new CustomOidcUser(null, customIdToken, userInfo);
 //		oidcUser.setId(user.getId());

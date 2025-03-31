@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Table(name = "role")
 @Entity
-public class Role implements Serializable {
+public class RoleEntity implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(generator = "role_id_seq_gen")
@@ -32,7 +32,7 @@ public class Role implements Serializable {
 	@JoinTable(name = "role_authority",
 			joinColumns = @JoinColumn(name = "role_id"),
 			inverseJoinColumns = @JoinColumn(name = "authority_id"))
-	private Set<Authority> authorities = new HashSet<>();
+	private Set<AuthorityEntity> authorities = new HashSet<>();
 
 	private String name;
 }

@@ -2,10 +2,9 @@ package org.authorizationserver.configuration.security.configs;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 import org.authorizationserver.configuration.security.handler.SocialLoginAuthenticationSuccessHandler;
-import org.authorizationserver.configuration.security.service.UserServiceOAuth2UserHandler;
+import org.authorizationserver.configuration.security.handler.UserServiceOAuth2UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -47,6 +46,7 @@ public class SecurityConfiguration {
 				.formLogin(formLogin -> formLogin
 								.loginPage("/login")
 								.permitAll()
+								.successHandler(authenticationSuccessHandler)
 //								.loginProcessingUrl("/api/login") // Endpoint xử lý login
 //								.usernameParameter("email")
 //								.passwordParameter("password")
@@ -109,12 +109,6 @@ public class SecurityConfiguration {
 				.build();
 	}
 
-	@Bean
-	public AuthenticationSuccessHandler authenticationSuccessHandler(UserServiceOAuth2UserHandler handler) {
-		SocialLoginAuthenticationSuccessHandler authenticationSuccessHandler = new SocialLoginAuthenticationSuccessHandler();
-		authenticationSuccessHandler.setOidcUserHandler(handler);
-		return authenticationSuccessHandler;
-	}
 
 //	@Bean
 //	public UserDetailsService userDetailsService() {

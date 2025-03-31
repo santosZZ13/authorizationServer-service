@@ -1,6 +1,6 @@
-package org.authorizationserver.model;
+package org.authorizationserver.configuration.security.model;
 
-import org.authorizationserver.persistent.entity.UserEntity;
+import org.authorizationserver.model.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,7 +30,9 @@ public class CustomUserDetails implements UserDetails {
 		this.email = userModel.getEmail();
 		this.password = userModel.getPassword();
 		this.authorities = userModel.getRoles().stream()
-				.map(SimpleGrantedAuthority::new)
+				.flatMap(role -> role.getAuthorities().stream()
+						.map(authority -> new SimpleGrantedAuthority(authority.getName()))
+				)
 				.collect(Collectors.toList());
 	}
 
