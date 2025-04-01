@@ -29,10 +29,11 @@ public class SecurityConfiguration {
 
 	@Bean
 	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http,
+														  CorsConfigurationSource corsConfigurationSource,
 														  AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
 		return http
 				.csrf(AbstractHttpConfigurer::disable)
-				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+				.cors(cors -> cors.configurationSource(corsConfigurationSource))
 				.authorizeHttpRequests(
 						(authorizeRequests) -> authorizeRequests
 								.requestMatchers("/oauth2/**").permitAll()
@@ -123,18 +124,6 @@ public class SecurityConfiguration {
 //		return new InMemoryUserDetailsManager(user);
 //	}
 
-	private CorsConfigurationSource corsConfigurationSource() {
-		return request -> {
-			CorsConfiguration ccfg = new CorsConfiguration();
-			ccfg.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Chỉ cho phép origin này
-			ccfg.setAllowedMethods(Collections.singletonList("*")); // Cho phép tất cả phương thức (GET, POST, v.v.)
-			ccfg.setAllowCredentials(true); // Cho phép gửi cookie/credentials
-			ccfg.setAllowedHeaders(Collections.singletonList("*")); // Cho phép tất cả header
-			ccfg.setExposedHeaders(Arrays.asList("Authorization")); // Phơi bày header Authorization nếu cần
-			ccfg.setMaxAge(3600L); // Cache preflight request trong 1 giờ
-			return ccfg;
-		};
-	}
 
 //	@Bean
 //	public CorsFilter corsFilter() {
