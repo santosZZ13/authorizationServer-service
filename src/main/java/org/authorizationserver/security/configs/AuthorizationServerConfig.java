@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -74,8 +75,8 @@ public class AuthorizationServerConfig {
 										throw new RuntimeException(e);
 									}
 								})
-				);
-//				.oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0;
+				)
+				.oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0;
 
 		// Nó redirect mày đến trang login (thường là /login, dựa trên cấu hình LoginUrlAuthenticationEntryPoint trong code của mày).
 		// Mày cần phải override nó để redirect mày đến trang login của mày.

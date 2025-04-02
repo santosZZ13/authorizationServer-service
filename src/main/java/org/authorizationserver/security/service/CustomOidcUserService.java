@@ -25,14 +25,13 @@ public class CustomOidcUserService extends OidcUserService {
 		OidcUser oidcUser = super.loadUser(userRequest);
 		String registrationId = userRequest.getClientRegistration().getRegistrationId();
 		Assert.isTrue(mappers.containsKey(registrationId), "No mapper defined for such registrationId");
-		OidcUserMapper mapper = mappers.get(userRequest.getClientRegistration().getRegistrationId());
+		OidcUserMapper mapper = mappers.get(registrationId);
 
 		String email = userRequest.getIdToken().getEmail();
 		UserModel localUserModel = userDaoRepository.findByEmail(email);
 		if (localUserModel != null) {
 			return mapper.map(oidcUser.getIdToken(), oidcUser.getUserInfo(), localUserModel);
 		}
-		//Map unregistered user
 		return mapper.map(oidcUser);
 	}
 }
