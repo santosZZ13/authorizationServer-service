@@ -18,9 +18,9 @@ spring:
     encoding: UTF-8
 
   datasource:
-    url: jdbc:postgresql://localhost:5442/demosso
-    username: demosso
-    password: password
+    url: jdbc:postgresql://34.132.190.113:5432/postgres
+    username: postgres
+    password: HQj/apB5(O0k%\P5
     driver-class-name: org.postgresql.Driver
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
