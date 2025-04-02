@@ -1,7 +1,7 @@
-package org.authorizationserver.configuration.security.service;
+package org.authorizationserver.security.service;
 
 import lombok.RequiredArgsConstructor;
-import org.authorizationserver.configuration.security.mapper.OidcUserMapper;
+import org.authorizationserver.security.mapper.OidcUserMapper;
 import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.model.UserModel;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;

@@ -1,10 +1,8 @@
-package org.authorizationserver.configuration.security.configs;
+package org.authorizationserver.security.configs;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
-import org.authorizationserver.configuration.security.handler.SocialLoginAuthenticationSuccessHandler;
-import org.authorizationserver.configuration.security.handler.UserServiceOAuth2UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,12 +12,9 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 
 
 @EnableWebSecurity
@@ -86,7 +81,6 @@ public class SecurityConfiguration {
 						})
 						.permitAll()
 				)
-
 				.addFilterBefore(new GenericFilter() {
 					@Override
 					public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -109,33 +103,4 @@ public class SecurityConfiguration {
 				}, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}
-
-
-//	@Bean
-//	public UserDetailsService userDetailsService() {
-//		UserDetails user = User.builder()
-//				.username("admin")
-//				// {noop} means "no operation," i.e., a raw password without any encoding applied.
-//				.password("{noop}secret")
-//				.roles("ADMIN")
-//				.authorities("ARTICLE_READ", "ARTICLE_WRITE")
-//				.build();
-//
-//		return new InMemoryUserDetailsManager(user);
-//	}
-
-
-//	@Bean
-//	public CorsFilter corsFilter() {
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		CorsConfiguration config = new CorsConfiguration();
-//		config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//		config.setAllowedMethods(Collections.singletonList("*"));
-//		config.setAllowCredentials(true);
-//		config.setAllowedHeaders(Collections.singletonList("*"));
-//		config.setExposedHeaders(Arrays.asList("Authorization"));
-//		config.setMaxAge(3600L);
-//		source.registerCorsConfiguration("/**", config);
-//		return new CorsFilter(source);
-//	}
 }

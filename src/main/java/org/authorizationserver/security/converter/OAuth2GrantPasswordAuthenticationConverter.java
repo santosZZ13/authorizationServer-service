@@ -1,7 +1,7 @@
-package org.authorizationserver.configuration.security.converter;
+package org.authorizationserver.security.converter;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.authorizationserver.configuration.security.model.GrantPasswordAuthenticationToken;
+import org.authorizationserver.security.model.GrantPasswordAuthenticationToken;
 import org.authorizationserver.util.OAuth2EndpointUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
+import static org.authorizationserver.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
 public class OAuth2GrantPasswordAuthenticationConverter implements AuthenticationConverter {
 	@Override

@@ -1,4 +1,4 @@
-package org.authorizationserver.configuration.security.configs;
+package org.authorizationserver.security.configs;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;

@@ -1,4 +1,4 @@
-package org.authorizationserver.configuration.security.model;
+package org.authorizationserver.security.model;
 
 import lombok.Getter;
 import org.springframework.lang.Nullable;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
+import static org.authorizationserver.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
 @Getter
 public class GrantPasswordAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {

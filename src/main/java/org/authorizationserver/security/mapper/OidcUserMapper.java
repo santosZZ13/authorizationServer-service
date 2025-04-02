@@ -1,4 +1,4 @@
-package org.authorizationserver.configuration.security.mapper;
+package org.authorizationserver.security.mapper;
 
 import org.authorizationserver.model.UserModel;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;

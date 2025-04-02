@@ -1,9 +1,9 @@
-package org.authorizationserver.configuration.security.configs;
+package org.authorizationserver.security.configs;
 
-import org.authorizationserver.configuration.security.converter.OAuth2GrantPasswordAuthenticationConverter;
-import org.authorizationserver.configuration.security.filter.CustomTokenEndpoint;
-import org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword;
-import org.authorizationserver.configuration.security.provider.GrantPasswordAuthenticationProvider;
+import org.authorizationserver.security.converter.OAuth2GrantPasswordAuthenticationConverter;
+import org.authorizationserver.security.filter.CustomTokenEndpoint;
+import org.authorizationserver.security.model.AuthorizationGrantTypePassword;
+import org.authorizationserver.security.provider.GrantPasswordAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

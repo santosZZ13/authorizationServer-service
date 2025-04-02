@@ -1,10 +1,10 @@
-package org.authorizationserver.configuration.security.provider;
+package org.authorizationserver.security.provider;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.authorizationserver.configuration.security.model.CustomUserDetails;
-import org.authorizationserver.configuration.security.model.GrantPasswordAuthenticationToken;
+import org.authorizationserver.security.model.CustomUserDetails;
+import org.authorizationserver.security.model.GrantPasswordAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 import java.security.Principal;
 import java.util.Objects;
 
-import static org.authorizationserver.configuration.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
+import static org.authorizationserver.security.model.AuthorizationGrantTypePassword.GRANT_PASSWORD;
 
 @Component
 @Log4j2
