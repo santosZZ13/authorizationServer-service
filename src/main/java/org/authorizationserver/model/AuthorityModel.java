@@ -20,4 +20,11 @@ public class AuthorityModel {
 				.name(authorityEntity.getName())
 				.build();
 	}
+
+	public AuthorityEntity toEntity() {
+		AuthorityEntity authorityEntity = new AuthorityEntity();
+		authorityEntity.setId(this.getId());
+		authorityEntity.setName(this.getName());
+		return authorityEntity;
+	}
 }

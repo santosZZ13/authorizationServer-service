@@ -10,12 +10,8 @@ import org.springframework.util.StringUtils;
 @Repository
 @AllArgsConstructor
 public class RoleDaoRepositoryImpl implements RoleDaoRepository {
-
 	public static final String DEFAULT_ROLE = "USER";
-
-
 	private final RoleRepository roleRepository;
-
 
 	@Override
 	public RoleModel getByName(String name) {

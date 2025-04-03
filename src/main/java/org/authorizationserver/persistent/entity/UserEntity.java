@@ -3,6 +3,7 @@ package org.authorizationserver.persistent.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
@@ -14,10 +15,10 @@ import java.util.UUID;
 @Getter
 @Entity(name = "User")
 @Table(name = "app_user")
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity implements Serializable {
+public class UserEntity extends BaseEntity implements Serializable {
 	//	@GeneratedValue(generator = "UUID")
 //	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 //	@Column(name = "id", columnDefinition = "char(36)")

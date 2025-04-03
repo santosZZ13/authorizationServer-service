@@ -81,8 +81,9 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 		return this.authorities;
 	}
 
-	public UserModel toInstantUser() {
+	public UserModel toInstantUserModel() {
 		return UserModel.builder()
+				.id(getId())
 				.email(getEmail())
 				.firstName(getGivenName())
 				.lastName(getFamilyName())
@@ -90,8 +91,8 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 				.locale(getLocale())
 				.active(isActive())
 //				.providerId(getId())
-//				.emailVerified(getEmailVerified())
-//				.roles(new HashSet<>())
+				.emailVerified(getEmailVerified())
+				.roleModels(new HashSet<>())
 				.build();
 	}
 }

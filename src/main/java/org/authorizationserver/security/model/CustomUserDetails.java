@@ -29,7 +29,7 @@ public class CustomUserDetails implements UserDetails {
 	public CustomUserDetails(UserModel userModel) {
 		this.email = userModel.getEmail();
 		this.password = userModel.getPassword();
-		this.authorities = userModel.getRoles().stream()
+		this.authorities = userModel.getRoleModels().stream()
 				.flatMap(role -> role.getAuthorities().stream()
 						.map(authority -> new SimpleGrantedAuthority(authority.getName()))
 				)

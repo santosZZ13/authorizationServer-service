@@ -24,16 +24,15 @@ public class UserModel {
 	private boolean emailVerified;
 	private boolean active;
 	private String provider;
-	private Set<RoleModel> roles;
+	private Set<RoleModel> roleModels;
 
 	public UserModel(UserEntity userEntity) {
 		this.email = userEntity.getEmail();
 		this.password = userEntity.getPassword();
 		this.firstName = userEntity.getFirstName();
 		this.lastName = userEntity.getLastName();
-		this.roles = userEntity.getRoleEntities().stream()
+		this.roleModels = userEntity.getRoleEntities().stream()
 				.map(RoleModel::fromEntity)
 				.collect(java.util.stream.Collectors.toSet());
 	}
-
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.authorizationserver.persistent.entity.AuthorityEntity;
 import org.authorizationserver.persistent.entity.RoleEntity;
 
 import java.util.HashSet;
@@ -26,4 +27,16 @@ public class RoleModel {
 		});
 		return roleModel;
 	}
+
+	public RoleEntity toEntity() {
+		RoleEntity roleEntity = new RoleEntity();
+		roleEntity.setName(this.getName());
+		roleEntity.setAuthorities(new HashSet<>());
+		this.getAuthorities().forEach(authorityModel -> {
+			AuthorityEntity authorityEntity = authorityModel.toEntity();
+			roleEntity.getAuthorities().add(authorityEntity);
+		});
+		return roleEntity;
+	}
+
 }

@@ -37,7 +37,7 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 	@Override
 	public OidcUser map(OidcIdToken idToken, OidcUserInfo userInfo, UserModel userModel) {
 		Set<GrantedAuthority> authorities = userModel
-				.getRoles()
+				.getRoleModels()
 				.stream()
 				.flatMap(role -> role.getAuthorities()
 						.stream().map(authorityModel -> new SimpleGrantedAuthority(authorityModel.getName()))
