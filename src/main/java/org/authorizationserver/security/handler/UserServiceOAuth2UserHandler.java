@@ -1,22 +1,13 @@
-package org.authorizationserver.configuration.security.handler;
+package org.authorizationserver.security.handler;
 
 import lombok.RequiredArgsConstructor;
 import org.authorizationserver.dao.RoleDaoRepository;
 import org.authorizationserver.dao.UserDaoRepository;
-import org.authorizationserver.configuration.security.model.CustomOidcUser;
-import org.authorizationserver.model.RoleModel;
-import org.authorizationserver.model.UserModel;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
-import java.util.Set;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor

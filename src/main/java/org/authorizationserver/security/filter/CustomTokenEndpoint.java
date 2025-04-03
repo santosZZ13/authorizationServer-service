@@ -1,4 +1,4 @@
-package org.authorizationserver.configuration.security.filter;
+package org.authorizationserver.security.filter;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

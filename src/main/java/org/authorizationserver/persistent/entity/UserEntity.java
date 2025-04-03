@@ -34,18 +34,25 @@ public class UserEntity implements Serializable {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
+	// locate: en_US, zh_CN, ja_JP
 	@Column(name = "locale")
 	private String locale;
 	@Column(name = "avatar_url")
 	private String avatarUrl;
 	@Column(name = "email_verified")
 	private boolean emailVerified;
-	@Column(name = "enable")
-	private boolean enable;
+	@Column(name = "active")
+	private boolean active;
+	/**
+	 * The provider name, such as google, github, etc.
+	 */
 	@Column(name = "provider")
 	private String provider;
-	@Column(name = "provider_id")
-	private Long providerId;
+//	/**
+//	 * The provider id, such as google id, github id, etc.
+//	 */
+//	@Column(name = "provider_id")
+//	private Long providerId;
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)

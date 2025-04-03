@@ -1,9 +1,8 @@
-package org.authorizationserver.configuration.security.model;
+package org.authorizationserver.security.model;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.authorizationserver.model.UserModel;
-import org.authorizationserver.persistent.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -87,9 +86,9 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 				.email(getEmail())
 				.firstName(getGivenName())
 				.lastName(getFamilyName())
-//				.avatarUrl(getPicture())
-//				.locale(getLocale())
-//				.enable(isActive())
+				.avatarUrl(getPicture())
+				.locale(getLocale())
+				.active(isActive())
 //				.providerId(getId())
 //				.emailVerified(getEmailVerified())
 //				.roles(new HashSet<>())

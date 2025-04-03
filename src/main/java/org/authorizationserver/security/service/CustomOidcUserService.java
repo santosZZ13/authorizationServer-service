@@ -1,7 +1,7 @@
-package org.authorizationserver.configuration.security.service;
+package org.authorizationserver.security.service;
 
 import lombok.RequiredArgsConstructor;
-import org.authorizationserver.configuration.security.mapper.OidcUserMapper;
+import org.authorizationserver.security.mapper.OidcUserMapper;
 import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.model.UserModel;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -25,14 +25,13 @@ public class CustomOidcUserService extends OidcUserService {
 		OidcUser oidcUser = super.loadUser(userRequest);
 		String registrationId = userRequest.getClientRegistration().getRegistrationId();
 		Assert.isTrue(mappers.containsKey(registrationId), "No mapper defined for such registrationId");
-		OidcUserMapper mapper = mappers.get(userRequest.getClientRegistration().getRegistrationId());
+		OidcUserMapper mapper = mappers.get(registrationId);
 
 		String email = userRequest.getIdToken().getEmail();
 		UserModel localUserModel = userDaoRepository.findByEmail(email);
 		if (localUserModel != null) {
 			return mapper.map(oidcUser.getIdToken(), oidcUser.getUserInfo(), localUserModel);
 		}
-		//Map unregistered user
 		return mapper.map(oidcUser);
 	}
 }

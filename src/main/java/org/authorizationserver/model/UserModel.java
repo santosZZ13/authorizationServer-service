@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.authorizationserver.persistent.entity.RoleEntity;
 import org.authorizationserver.persistent.entity.UserEntity;
 
 import java.util.Set;
@@ -20,6 +19,11 @@ public class UserModel {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String locale;
+	private String avatarUrl;
+	private boolean emailVerified;
+	private boolean active;
+	private String provider;
 	private Set<RoleModel> roles;
 
 	public UserModel(UserEntity userEntity) {

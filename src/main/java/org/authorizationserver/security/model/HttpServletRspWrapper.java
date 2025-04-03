@@ -1,4 +1,4 @@
-package org.authorizationserver.configuration.security.model;
+package org.authorizationserver.security.model;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletResponseWrapper;

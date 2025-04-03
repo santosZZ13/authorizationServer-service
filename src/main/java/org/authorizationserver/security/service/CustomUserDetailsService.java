@@ -1,9 +1,9 @@
-package org.authorizationserver.configuration.security.service;
+package org.authorizationserver.security.service;
 
 import lombok.AllArgsConstructor;
 import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.model.UserModel;
-import org.authorizationserver.configuration.security.model.CustomUserDetails;
+import org.authorizationserver.security.model.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

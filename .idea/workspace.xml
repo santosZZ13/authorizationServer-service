@@ -5,26 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54f9827b-1a17-426a-899b-c9db5f752cb3" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/client/RedirectIsNotExistInAuthorizationCodeModeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/client/RegisterClientExistException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/ResponseError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../discovery-service/.idea/git_toolbox_blame.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/dto/clientdto/ClientDTORequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/dto/clientdto/ClientDTORequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/dto/clientdto/ClientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/dto/clientdto/ClientDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/ApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/ApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/CustomRestExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/CustomRestExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/FieldErrorWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/FieldErrorWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/GenericResponseErrorWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/GenericResponseErrorWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/GenericResponseSuccessWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/GenericResponseSuccessWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/JpaRegisteredClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/JpaRegisteredClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/JpaRegisteredClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/JpaRegisteredClientServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/validation/impl/RequireFieldValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/validation/impl/RequireFieldValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../discovery-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../discovery-service/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../discovery-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../discovery-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../discovery-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../discovery-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -37,9 +37,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;nampython&quot;
+  }
+}</component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
   </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/santosZZ13/authorizationServer-service.git&quot;,
+    &quot;accountId&quot;: &quot;7e80b844-89cd-4674-92bb-e677ce28f9e8&quot;
+  }
+}</component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
@@ -47,8 +59,15 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 7
+  &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2gxTMYAsxrHqzH1Zs44cpuA8CW5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -56,43 +75,96 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.AuthorizationServerApplication.executor": "Debug",
-    "ToolWindowGitHub Copilot Chat.ShowToolbar": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nam.dinh/Desktop/PROJ/authorizationServer-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Java Scratch.Scratch (1).executor&quot;: &quot;Run&quot;,
+    &quot;Java Scratch.Scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.authorizationServer-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.authorizationServer-service [install].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.App (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AuthorizationServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;ToolWindowGitHub Copilot Chat.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nam13/Desktop/algo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.authorizationserver.common" />
+      <recent name="org.authorizationserver.configuration.security.provider" />
+      <recent name="org.authorizationserver.configuration.security.configs" />
       <recent name="org.authorizationserver.exception" />
       <recent name="org.authorizationserver.persistent.repository" />
-      <recent name="org.authorizationserver.service.impl" />
-      <recent name="org.authorizationserver.service" />
-      <recent name="org.authorizationserver.persistent.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AuthorizationServerApplication">
+    <configuration name="Scratch (1)" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Data" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.data.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="cloud-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.gateway.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthorizationServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="authorizationServer-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.authorizationserver.AuthorizationServerApplication" />
@@ -106,17 +178,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DiscoveryService" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="discover-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.discovery.DiscoveryService" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.AuthorizationServerApplication" />
+        <item itemvalue="Java Scratch.Scratch" />
+        <item itemvalue="Java Scratch.Scratch (1)" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -136,6 +217,23 @@
       <workItem from="1719200157741" duration="54000" />
       <workItem from="1719479509735" duration="1364000" />
       <workItem from="1719800013989" duration="27267000" />
+      <workItem from="1737636803957" duration="381000" />
+      <workItem from="1737637244676" duration="356000" />
+      <workItem from="1737637623718" duration="4128000" />
+      <workItem from="1739795617895" duration="20281000" />
+      <workItem from="1740492676125" duration="13165000" />
+      <workItem from="1741352913074" duration="3979000" />
+      <workItem from="1741421058563" duration="3296000" />
+      <workItem from="1741429021155" duration="27792000" />
+      <workItem from="1742172044561" duration="43000" />
+      <workItem from="1742172106304" duration="1430000" />
+      <workItem from="1742210458752" duration="29362000" />
+      <workItem from="1742564825166" duration="2471000" />
+      <workItem from="1742625761894" duration="2021000" />
+      <workItem from="1742647446962" duration="38117000" />
+      <workItem from="1743168626333" duration="646000" />
+      <workItem from="1743170669740" duration="439000" />
+      <workItem from="1743380450002" duration="11133000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -241,7 +339,55 @@
       <option name="project" value="LOCAL" />
       <updated>1718876346507</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="init">
+      <option name="closed" value="true" />
+      <created>1742172398245</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1742172398245</updated>
+    </task>
+    <task id="LOCAL-00015" summary="init">
+      <option name="closed" value="true" />
+      <created>1742218673544</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1742218673544</updated>
+    </task>
+    <task id="LOCAL-00016" summary="init">
+      <option name="closed" value="true" />
+      <created>1742218797816</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742218797816</updated>
+    </task>
+    <task id="LOCAL-00017" summary="init">
+      <option name="closed" value="true" />
+      <created>1742738061672</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742738061673</updated>
+    </task>
+    <task id="LOCAL-00018" summary="init">
+      <option name="closed" value="true" />
+      <created>1743382958748</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1743382958748</updated>
+    </task>
+    <task id="LOCAL-00019" summary="init">
+      <option name="closed" value="true" />
+      <created>1743468196912</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1743468196912</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +398,26 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -271,39 +436,14 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-client/6.1.3/spring-security-oauth2-client-6.1.3-sources.jar!/org/springframework/security/oauth2/client/oidc/authentication/OidcAuthorizationCodeAuthenticationProvider.java</url>
-          <line>155</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/handler/UserServiceOAuth2UserHandler.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/handler/SocialLoginAuthenticationSuccessHandler.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/CustomOidcUserService.java</url>
           <line>24</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/handler/UserServiceOAuth2UserHandler.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/client/InMemoryRegisteredClientRepository.java</url>
           <line>85</line>
           <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/TokenConfiguration.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/InMemoryOAuth2AuthorizationService.java</url>
@@ -322,7 +462,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/AuthorizationServerConfiguration.java</url>
-          <line>187</line>
+          <line>190</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -356,11 +496,6 @@
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/InMemoryOAuth2AuthorizationConsentService.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="77" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/handler/TokenEndpointSuccessHandler.java</url>
           <line>14</line>
           <option name="timeStamp" value="87" />
@@ -371,49 +506,14 @@
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/web/OAuth2TokenEndpointFilter.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/web/OAuth2TokenEndpointFilter.java</url>
-          <line>249</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/CustomUserDetailsService.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/UserServiceImpl.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/TestController.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/6.1.3/spring-security-web-6.1.3-sources.jar!/org/springframework/security/web/access/intercept/FilterSecurityInterceptor.java</url>
           <line>82</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/AuthorizationServerConfiguration.java</url>
-          <line>185</line>
+          <line>188</line>
           <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/CustomRestExceptionHandler.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/exception/util/CustomRestExceptionHandler.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/service/impl/JpaRegisteredClientServiceImpl.java</url>
@@ -425,18 +525,54 @@
           <line>35</line>
           <option name="timeStamp" value="123" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/controller/JwkSetController.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/configs/TokenConfiguration.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/service/CustomUserDetailsService.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/filter/CustomTokenResponseFilter.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/filter/CustomTokenResponseFilter.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/filter/CustomTokenResponseFilter.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/handler/UserServiceOAuth2UserHandler.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/authorizationserver/configuration/security/filter/CustomTokenEndpoint.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="157" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="org.authorizationserver.model.CustomUserDetails" memberName="password" />
         <PinnedItemInfo parentTag="org.springframework.security.oauth2.core.oidc.OidcIdToken" memberName="claims" />
         <PinnedItemInfo parentTag="org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser" memberName="authorities" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <inline-watch fileUrl="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-oauth2-authorization-server/1.1.2/spring-security-oauth2-authorization-server-1.1.2-sources.jar!/org/springframework/security/oauth2/server/authorization/web/OAuth2AuthorizationEndpointFilter.java" line="94">
-        <watch expression="((OrRequestMatcher)((OAuth2AuthorizationEndpointFilter)this).authorizationEndpointMatcher).requestMatchers" language="JAVA" custom="org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter,org.springframework.security.web.util.matcher.OrRequestMatcher" />
-      </inline-watch>
-    </watches-manager>
   </component>
 </project>
