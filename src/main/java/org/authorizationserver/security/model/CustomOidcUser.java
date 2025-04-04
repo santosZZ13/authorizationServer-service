@@ -104,7 +104,6 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 				.provider(getProvider())
 //				.providerId(getId())
 				.emailVerified(getEmailVerified())
-//				.roleModels(new HashSet<>())
 				.build();
 	}
 }

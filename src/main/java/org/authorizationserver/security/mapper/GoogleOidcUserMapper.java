@@ -1,5 +1,6 @@
 package org.authorizationserver.security.mapper;
 
+import org.authorizationserver.enums.Provider;
 import org.authorizationserver.persistent.entity.UserEntity;
 import org.authorizationserver.security.model.CustomOidcUser;
 import org.authorizationserver.model.UserModel;
@@ -24,6 +25,7 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 		CustomOidcUser customOidcUser = new CustomOidcUser(oidcUser.getIdToken(), oidcUser.getUserInfo());
 		customOidcUser.setUsername(oidcUser.getEmail());
 		customOidcUser.setActive(Boolean.TRUE);
+		customOidcUser.setProvider(Provider.GOOGLE);
 		return customOidcUser;
 	}
 
@@ -57,6 +59,7 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 		customOidcUser.setCreatedAt(userEntity.getCreatedAt());
 		customOidcUser.setProvider(userEntity.getProvider());
 		customOidcUser.setActive(userEntity.isActive());
+		customOidcUser.setProvider(userEntity.getProvider());
 		return customOidcUser;
 	}
 }
