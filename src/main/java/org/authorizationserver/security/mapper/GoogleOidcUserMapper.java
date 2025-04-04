@@ -1,5 +1,6 @@
 package org.authorizationserver.security.mapper;
 
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.authorizationserver.security.model.CustomOidcUser;
 import org.authorizationserver.model.UserModel;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,44 +23,40 @@ public class GoogleOidcUserMapper implements OidcUserMapper {
 	public OidcUser map(OidcUser oidcUser) {
 		CustomOidcUser customOidcUser = new CustomOidcUser(oidcUser.getIdToken(), oidcUser.getUserInfo());
 		customOidcUser.setUsername(oidcUser.getEmail());
-		customOidcUser.setActive(true);
+		customOidcUser.setActive(Boolean.TRUE);
 		return customOidcUser;
 	}
 
-	/**
-	 * Maps the OidcUser to a CustomOidcUser with additional claims and authorities.
-	 *
-	 * @param idToken
-	 * @param userInfo
-	 * @param userModel
-	 * @return
-	 */
-	@Override
-	public OidcUser map(OidcIdToken idToken, OidcUserInfo userInfo, UserModel userModel) {
-		Set<GrantedAuthority> authorities = userModel
-				.getRoleModels()
-				.stream()
-				.flatMap(role -> role.getAuthorities()
-						.stream().map(authorityModel -> new SimpleGrantedAuthority(authorityModel.getName()))
-				)
-				.collect(Collectors.toSet());
 
+	@Override
+	public OidcUser map(OidcIdToken idToken, OidcUserInfo userInfo, UserEntity userEntity) {
+		Set<GrantedAuthority> authorities = userEntity.getAuthorities();
+		Map<String, Object> claims = getClaims(idToken, userEntity);
+		OidcIdToken customIdToken = new OidcIdToken(idToken.getTokenValue(), idToken.getIssuedAt(), idToken.getExpiresAt(), claims);
+		return getCustomOidcUser(authorities, customIdToken, userInfo, userEntity);
+	}
+
+	private Map<String, Object> getClaims(OidcIdToken idToken, UserEntity userEntity) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.putAll(idToken.getClaims());
-		claims.put(StandardClaimNames.GIVEN_NAME, userModel.getFirstName());
-		claims.put(StandardClaimNames.FAMILY_NAME, userModel.getLastName());
-		claims.put(StandardClaimNames.LOCALE, userModel.getLocale());
-		claims.put(StandardClaimNames.PICTURE, userModel.getAvatarUrl());
+		claims.put(StandardClaimNames.GIVEN_NAME, userEntity.getFirstName());
+		claims.put(StandardClaimNames.FAMILY_NAME, userEntity.getLastName());
+		claims.put(StandardClaimNames.LOCALE, userEntity.getLocale());
+		claims.put(StandardClaimNames.PICTURE, userEntity.getAvatarUrl());
+		return claims;
+	}
 
-		OidcIdToken customIdToken = new OidcIdToken(
-				idToken.getTokenValue(), idToken.getIssuedAt(), idToken.getExpiresAt(), claims
-		);
-
-		CustomOidcUser oidcUser = new CustomOidcUser(authorities, customIdToken, userInfo);
-		oidcUser.setId(userModel.getId());
-		oidcUser.setUsername(userModel.getEmail());
-//		oidcUser.setCreatedAt(userModel.getCreatedAt());
-//		oidcUser.setActive(userModel.get());
-		return oidcUser;
+	private CustomOidcUser getCustomOidcUser(Set<GrantedAuthority> authorities,
+											 OidcIdToken idToken,
+											 OidcUserInfo userInfo,
+											 UserEntity userEntity
+	) {
+		CustomOidcUser customOidcUser = new CustomOidcUser(authorities, idToken, userInfo);
+		customOidcUser.setId(userEntity.getId());
+		customOidcUser.setUsername(userEntity.getEmail());
+		customOidcUser.setCreatedAt(userEntity.getCreatedAt());
+		customOidcUser.setProvider(userEntity.getProvider());
+		customOidcUser.setActive(userEntity.isActive());
+		return customOidcUser;
 	}
 }

@@ -51,8 +51,8 @@ spring:
         registration:
           google:
             provider: google
-            client-id: 773619103626-9bobjk5abiimhq9f58tddur80cm6tg1j.apps.googleusercontent.com
-            client-secret: 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
+            client-id: 402954404657-k57kh27pm1ddgg21dcnjanb5eaujvifl.apps.googleusercontent.com
+            client-secret: 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
             redirectUri: http://localhost:8002/login/oauth2/code/google
 
               #            client-authentication-method: basic

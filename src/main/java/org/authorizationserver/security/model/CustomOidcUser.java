@@ -1,8 +1,10 @@
 package org.authorizationserver.security.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.authorizationserver.model.UserModel;
+import org.authorizationserver.enums.Provider;
+import org.authorizationserver.persistent.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,22 +24,31 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 	private UUID id;
 	private String username;
 	private boolean active;
+	private Provider provider;
 	private LocalDateTime createdAt;
 	private Collection<? extends GrantedAuthority> authorities = new HashSet<>();
 
-	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities, OidcIdToken idToken) {
+	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities,
+						  OidcIdToken idToken) {
 		super(authorities, idToken, null, IdTokenClaimNames.SUB);
 	}
 
-	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities, OidcIdToken idToken, String nameAttributeKey) {
+	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities,
+						  OidcIdToken idToken,
+						  String nameAttributeKey) {
 		super(authorities, idToken, null, nameAttributeKey);
 	}
 
-	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities, OidcIdToken idToken, OidcUserInfo userInfo) {
+	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities,
+						  OidcIdToken idToken,
+						  OidcUserInfo userInfo) {
 		this(authorities, idToken, userInfo, IdTokenClaimNames.SUB);
 	}
 
-	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities, OidcIdToken idToken, OidcUserInfo userInfo, String nameAttributeKey) {
+	public CustomOidcUser(Collection<? extends GrantedAuthority> authorities,
+						  OidcIdToken idToken,
+						  OidcUserInfo userInfo,
+						  String nameAttributeKey) {
 		super(AuthorityUtils.NO_AUTHORITIES, idToken, userInfo, nameAttributeKey);
 		/**
 		 * Keep the authorities mutable
@@ -81,8 +92,8 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 		return this.authorities;
 	}
 
-	public UserModel toInstantUserModel() {
-		return UserModel.builder()
+	public UserEntity toInstantUserEntity() {
+		return UserEntity.builder()
 				.id(getId())
 				.email(getEmail())
 				.firstName(getGivenName())
@@ -90,9 +101,10 @@ public class CustomOidcUser extends DefaultOidcUser implements UserDetails {
 				.avatarUrl(getPicture())
 				.locale(getLocale())
 				.active(isActive())
+				.provider(getProvider())
 //				.providerId(getId())
 				.emailVerified(getEmailVerified())
-				.roleModels(new HashSet<>())
+//				.roleModels(new HashSet<>())
 				.build();
 	}
 }

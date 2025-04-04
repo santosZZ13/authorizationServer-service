@@ -5,11 +5,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import org.authorizationserver.enums.Provider;
 
 @Setter
 @Getter
@@ -20,9 +24,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserEntity extends BaseEntity implements Serializable {
 	//	@GeneratedValue(generator = "UUID")
-//	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-//	@Column(name = "id", columnDefinition = "char(36)")
-//	@JdbcTypeCode(SqlTypes.VARCHAR)
+	//	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	//	@Column(name = "id", columnDefinition = "char(36)")
+	//	@JdbcTypeCode(SqlTypes.VARCHAR)
 	@Id
 	@UuidGenerator(style = UuidGenerator.Style.TIME)
 	@Column(name = "id", updatable = false, nullable = false)
@@ -44,21 +48,27 @@ public class UserEntity extends BaseEntity implements Serializable {
 	private boolean emailVerified;
 	@Column(name = "active")
 	private boolean active;
-	/**
-	 * The provider name, such as google, github, etc.
-	 */
 	@Column(name = "provider")
-	private String provider;
-//	/**
-//	 * The provider id, such as google id, github id, etc.
-//	 */
-//	@Column(name = "provider_id")
+	@Enumerated(EnumType.STRING)
+	private Provider provider;
+	//	@Column(name = "provider_id")
 //	private Long providerId;
-
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<RoleEntity> roleEntities = new HashSet<>();
+
+
+	public Set<GrantedAuthority> getAuthorities() {
+		return this
+				.getRoleEntities()
+				.stream()
+				.flatMap(role -> role.getAuthorities()
+						.stream()
+						.map(authority -> new SimpleGrantedAuthority(authority.getName()))
+				)
+				.collect(Collectors.toSet());
+	}
 }

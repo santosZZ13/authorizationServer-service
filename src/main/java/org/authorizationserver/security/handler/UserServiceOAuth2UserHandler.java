@@ -1,10 +1,15 @@
 package org.authorizationserver.security.handler;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.authorizationserver.dao.RoleDaoRepository;
 import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.model.RoleModel;
 import org.authorizationserver.model.UserModel;
+import org.authorizationserver.persistent.entity.RoleEntity;
+import org.authorizationserver.persistent.entity.UserEntity;
+import org.authorizationserver.persistent.repository.RoleRepository;
+import org.authorizationserver.persistent.repository.UserRepository;
 import org.authorizationserver.security.model.CustomOidcUser;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,26 +25,28 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
 
-	private final UserDaoRepository userDaoRepository;
 	private final RoleDaoRepository roleDaoRepository;
+	private final UserRepository userRepository;
+	private final RoleRepository roleRepository;
 
 	@Override
 	public void accept(OidcUser user) {
-//		// Capture user in a local data store on first authentication
 		CustomOidcUser oidcUser = (CustomOidcUser) user;
-		if (oidcUser.getId() == null && this.userDaoRepository.findByEmail(user.getName()) == null) {
+		if (oidcUser.getId() == null && this.userRepository.findByEmail(user.getName()).isEmpty()) {
 			Collection<GrantedAuthority> grantedAuthorities = (Collection<GrantedAuthority>) oidcUser.getAuthorities();
-			UserModel instantUserModel = oidcUser.toInstantUserModel();
-			RoleModel defaultRoleModel = roleDaoRepository.getDefaultRole();
-			if (defaultRoleModel != null) {
-				instantUserModel.setRoleModels(Set.of(defaultRoleModel));
-			}
-			this.userDaoRepository.saveUserModel(instantUserModel);
+			UserEntity instantUserEntity = oidcUser.toInstantUserEntity();
+			RoleEntity defaultRoleEntity = roleRepository.getDefaultRoleEntity();
 
-			if (!CollectionUtils.isEmpty(instantUserModel.getRoleModels())) {
-				Set<? extends GrantedAuthority> authorities = instantUserModel.getRoleModels().stream()
+			if (defaultRoleEntity != null) {
+				instantUserEntity.setRoleEntities(Set.of(defaultRoleEntity));
+			}
+			this.userRepository.save(instantUserEntity);
+
+			if (!CollectionUtils.isEmpty(instantUserEntity.getRoleEntities())) {
+				Set<? extends GrantedAuthority> authorities = instantUserEntity.getRoleEntities().stream()
 						.flatMap(role -> role.getAuthorities().stream()
 								.map(authority -> new SimpleGrantedAuthority(authority.getName()))
 						)
@@ -47,9 +54,10 @@ public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
 
 				grantedAuthorities.addAll(authorities);
 			}
-			oidcUser.setId(instantUserModel.getId());
+			oidcUser.setId(instantUserEntity.getId());
 		}
 
+		log.info("User {} has logged in", user.getName());
 	}
 
 	@Override

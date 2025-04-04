@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.authorizationserver.enums.Provider;
 import org.authorizationserver.persistent.entity.UserEntity;
 
 import java.util.Set;
@@ -23,7 +24,7 @@ public class UserModel {
 	private String avatarUrl;
 	private boolean emailVerified;
 	private boolean active;
-	private String provider;
+	private Provider provider;
 	private Set<RoleModel> roleModels;
 
 	public UserModel(UserEntity userEntity) {
