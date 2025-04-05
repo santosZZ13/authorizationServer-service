@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 
 @Component
 @AllArgsConstructor
-public class SocialLoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 	private final Consumer<OAuth2User> oauth2UserHandler = (user) -> {};
 	private final UserServiceOAuth2UserHandler oidcUserHandler;
@@ -35,8 +35,7 @@ public class SocialLoginAuthenticationSuccessHandler implements AuthenticationSu
 			}
 		}
 
+//		response.sendRedirect("/foo");
 		this.delegate.onAuthenticationSuccess(request, response, authentication);
 	}
-
-
 }

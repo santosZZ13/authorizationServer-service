@@ -1,5 +1,6 @@
 package org.authorizationserver.security.configs;
 
+import lombok.extern.slf4j.Slf4j;
 import org.authorizationserver.security.converter.OAuth2GrantPasswordAuthenticationConverter;
 import org.authorizationserver.security.filter.CustomTokenEndpoint;
 import org.authorizationserver.security.model.AuthorizationGrantTypePassword;
@@ -35,6 +36,7 @@ import java.util.UUID;
 /**
  * For everything related to the OAuth2 authorization server
  */
+@Slf4j
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
 	@Bean
@@ -47,7 +49,6 @@ public class AuthorizationServerConfig {
 			CustomTokenEndpoint customTokenEndpoint
 	) throws Exception {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-
 		http
 				.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
 				.authorizationEndpoint(authorizationEndpoint ->
@@ -61,6 +62,12 @@ public class AuthorizationServerConfig {
 									String redirectUri = authorization.getRedirectUri();
 									String redirectUrl = redirectUri + "?code=" + code;
 									response.sendRedirect(redirectUrl);
+								})
+								.errorResponseHandler((request, response, authenticationException) -> {
+									// Handle error response
+									// You can customize the error response here if needed
+									log.info(authenticationException.toString());
+									response.sendRedirect("/error");
 								})
 				)
 				.tokenEndpoint(tokenEndpoint ->
