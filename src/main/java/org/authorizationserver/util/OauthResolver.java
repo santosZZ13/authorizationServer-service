@@ -1,6 +1,6 @@
 package org.authorizationserver.util;
 
-import org.authorizationserver.security.model.AuthorizationGrantTypePassword;
+import org.authorizationserver.configs.model.AuthorizationGrantTypePassword;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 

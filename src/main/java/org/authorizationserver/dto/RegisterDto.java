@@ -15,7 +15,9 @@ public interface RegisterDto {
 		private String confirmPassword;
 		private String firstName;
 		private String lastName;
-		private String role;
+		private int birthMonth;
+		private int birthDay;
+		private int birthYear;
 	}
 
 

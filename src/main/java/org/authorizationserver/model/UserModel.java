@@ -25,6 +25,9 @@ public class UserModel {
 	private boolean emailVerified;
 	private boolean active;
 	private Provider provider;
+	private int birthMonth;
+	private int birthDay;
+	private int birthYear;
 	private Set<RoleModel> roleModels;
 
 	public UserModel(UserEntity userEntity) {

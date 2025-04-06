@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 import org.authorizationserver.enums.Provider;
 
 @Setter
@@ -53,6 +54,21 @@ public class UserEntity extends BaseEntity implements Serializable {
 	private Provider provider;
 	//	@Column(name = "provider_id")
 //	private Long providerId;
+	@Column(name = "birth_month")
+	private int birthMonth;
+	@Column(name = "birth_day")
+	private int birthDay;
+	@Column(name = "birth_year")
+	private int birthYear;
+	//	@Column(name = "phone_number")
+//	private String phoneNumber;
+//	@Column(name = "phone_verified")
+//	private boolean phoneVerified;
+//	@Column(name = "phone_verified_at")
+//	private String phoneVerifiedAt;
+//	@Column(name = "phone_verified_code")
+//	private String phoneVerifiedCode;
+//	@Column(name = "phone_verified_code_expired_at")
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role",
