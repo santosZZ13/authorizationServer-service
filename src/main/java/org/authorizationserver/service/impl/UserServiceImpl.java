@@ -8,7 +8,9 @@ import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.dto.RegisterDto;
 import org.authorizationserver.dto.UserDto;
 import org.authorizationserver.enums.Provider;
+import org.authorizationserver.exception.PasswordNotMatchException;
 import org.authorizationserver.exception.RegistrationException;
+import org.authorizationserver.exception.UserAlreadyExistException;
 import org.authorizationserver.model.RoleModel;
 import org.authorizationserver.model.UserModel;
 import org.authorizationserver.service.UserService;
@@ -23,6 +25,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.YearMonth;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -75,21 +78,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void registerUser(RegisterDto.Request registerRequest, HttpServletRequest request, HttpServletResponse response) {
 		try {
-
 			String password = registerRequest.getPassword();
 			String confirmPassword = registerRequest.getConfirmPassword();
 			if (!password.equals(confirmPassword)) {
-//				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Passwords do not match!");
-				throw new RegistrationException("Passwords do not match!");
+				throw new PasswordNotMatchException("Password and confirm password do not match", "", "");
 			}
 
 			String email = registerRequest.getEmail();
 			UserModel userModelByEmail = userDaoRepository.findByEmail(email);
 			if (!Objects.equals(userModelByEmail, null)) {
-//				throw new RuntimeException("Email already exists: " + request.getUsername());
-				throw new RegistrationException("An account already exists with that email!");
-//				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "An account already exists with that email!");
-//				return;
+				throw new UserAlreadyExistException("User already exists", "", "");
 			}
 
 			UserModel userModel = toUserModel(registerRequest);
@@ -108,10 +106,25 @@ public class UserServiceImpl implements UserService {
 					savedRequest.getRedirectUrl() : "/oauth2/authorize?response_type=code&client_id=demo-client&redirect_uri=http://localhost:3000/auth";
 			// Redirect về URL ban đầu để tiếp tục OAuth 2.0 flow
 			response.sendRedirect(redirectUrl);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new RegistrationException("An unexpected error occurred during registration", e.getMessage(), "");
 		}
 	}
+
+
+	private void validateBirthDate(RegisterDto.Request registerRequest) {
+		int month = registerRequest.getBirthMonth();
+		int day = registerRequest.getBirthDay();
+		int year = registerRequest.getBirthYear();
+
+		YearMonth yearMonth = YearMonth.of(year, month);
+		int daysInMonth = yearMonth.lengthOfMonth();
+
+		if (day > daysInMonth) {
+			throw new RegistrationException("Invalid birth date: Day " + day + " is not valid for month " + month + " in year " + year, "", "");
+		}
+	}
+
 
 	private UserModel toUserModel(RegisterDto.Request registerRequest) {
 		return UserModel.builder()

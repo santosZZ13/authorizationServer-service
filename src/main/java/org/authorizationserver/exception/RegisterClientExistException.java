@@ -1,6 +1,4 @@
-package org.authorizationserver.exception.client;
-
-import org.authorizationserver.exception.util.ApiException;
+package org.authorizationserver.exception;
 
 public class RegisterClientExistException extends ApiException {
 	public RegisterClientExistException(String message, String code, String shortDesc) {

@@ -37,7 +37,7 @@ public class SecurityConfiguration {
 								.requestMatchers("/main.css").permitAll()
 								.requestMatchers("/login").permitAll()
 								.requestMatchers("/signup").permitAll()
-								.requestMatchers("/register").permitAll()
+								.requestMatchers("/days-in-month").permitAll()
 								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
 								.requestMatchers("/client").permitAll()
 								.anyRequest().authenticated())

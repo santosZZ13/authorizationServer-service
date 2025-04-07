@@ -1,8 +1,13 @@
-package org.authorizationserver.exception.util;
+package org.authorizationserver.exception.exceptionHandler;
 
+import jakarta.servlet.http.HttpServletResponse;
+import org.authorizationserver.exception.ApiException;
+import org.authorizationserver.common.FieldErrorWrapper;
+import org.authorizationserver.common.GenericResponseErrorWrapper;
+import org.authorizationserver.common.GenericResponseSuccessWrapper;
+import org.authorizationserver.common.ResponseError;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,16 +28,18 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 @ControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 
-
-	@ExceptionHandler({ Exception.class })
-	public ResponseEntity<Object> handAll(@NotNull Exception ex, WebRequest request) {
+	@ExceptionHandler({Exception.class})
+	public ResponseEntity<Object> handAll(@NotNull Exception ex, WebRequest request, HttpServletResponse response) {
 		ResponseError responseError = ResponseError.builder()
-				.httpStatus(INTERNAL_SERVER_ERROR)
 				.code("")
 				.shortDesc(ex.getMessage())
 				.message(ex.getMessage())
 				.build();
-		return new ResponseEntity<>(responseError, new HttpHeaders(), responseError.getHttpStatus());
+		return new ResponseEntity<>(
+				responseError,
+				new HttpHeaders(),
+				INTERNAL_SERVER_ERROR
+		);
 	}
 
 
@@ -45,7 +52,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 				.code(code)
 				.shortDesc(shortDesc)
 				.message(message)
-				.httpStatus(HttpStatus.BAD_REQUEST)
 				.build();
 		return new ResponseEntity<>(GenericResponseSuccessWrapper.builder()
 				.success(Boolean.FALSE)

@@ -1,4 +1,4 @@
-package org.authorizationserver.exception.util;
+package org.authorizationserver.common;
 
 import lombok.Getter;
 import lombok.Setter;

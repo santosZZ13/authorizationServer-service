@@ -1,6 +1,4 @@
-package org.authorizationserver.exception.client;
-
-import org.authorizationserver.exception.util.ApiException;
+package org.authorizationserver.exception;
 
 public class RedirectIsNotExistInAuthorizationCodeModeException extends ApiException {
 	public RedirectIsNotExistInAuthorizationCodeModeException(String message, String code, String shortDesc) {

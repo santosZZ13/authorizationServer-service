@@ -1,4 +1,4 @@
-package org.authorizationserver.exception.util;
+package org.authorizationserver.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
