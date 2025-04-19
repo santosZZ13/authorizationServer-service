@@ -35,7 +35,8 @@ public class UserDaoRepositoryImpl implements UserDaoRepository {
 		userRepository.save(toEntity(userModel));
 	}
 
-	private UserEntity toEntity(UserModel userModel) {
+	@Override
+	public UserEntity toEntity(UserModel userModel) {
 		RoleEntity defaultRoleEntity = roleRepository.getDefaultRoleEntity();
 		return UserEntity.builder()
 				.email(userModel.getEmail())

@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.authorizationserver.dto.RegisterDto;
-import org.authorizationserver.dto.UserDto;
+import org.authorizationserver.dto.UserInfoDto;
 import org.authorizationserver.exception.RegistrationException;
 import org.authorizationserver.service.UserService;
 import org.authorizationserver.util.DateUtils;
@@ -30,7 +30,7 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping("/me")
-	public ResponseEntity<UserDto.Response> getCurrentUser() {
+	public ResponseEntity<UserInfoDto.Response> getCurrentUser() {
 		return ResponseEntity.ok(userService.getCurrentUser());
 	}
 
@@ -82,7 +82,6 @@ public class UserController {
 			String errorMessage = bindingResult.getAllErrors().stream()
 					.map(DefaultMessageSourceResolvable::getDefaultMessage)
 					.collect(Collectors.joining("; "));
-
 			model.addAttribute("error", "Please correct the errors in the form: " + errorMessage);
 			model.addAttribute("registerRequest", registerRequest);
 			addDateAttributesToModel(model);

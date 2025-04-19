@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-public interface UserDto {
+public interface UserInfoDto {
 	class Request {
 
 	}
@@ -25,7 +25,14 @@ public interface UserDto {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	class ResponseData {
-		private String username;
+		private String email;
+		private String firstName;
+		private String lastName;
+		private String locale;
+		private String avatarUrl;
+		private String emailVerified;
+		private String active;
+		private String provide;
 		private Set<String> roles;
 	}
 }

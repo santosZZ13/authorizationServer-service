@@ -40,11 +40,15 @@ public class SecurityConfiguration {
 								.requestMatchers("/days-in-month").permitAll()
 								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
 								.requestMatchers("/client").permitAll()
+								.requestMatchers("/confirmCode").permitAll()
+								.requestMatchers("/error").authenticated()
+								.requestMatchers("/").authenticated()
 								.anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin
 								.loginPage("/login")
 								.permitAll()
 								.successHandler(authenticationSuccessHandler)
+//								.failureForwardUrl("/error")
 //						.failureHandler(authenticationFailureHandler)
 				)
 				.logout(logout -> logout
@@ -54,8 +58,10 @@ public class SecurityConfiguration {
 						.permitAll()
 				)
 				.logout(LogoutConfigurer::permitAll)
-				// Khi bạn thêm .oauth2Login(withDefaults()), Spring Security tự động tạo một endpoint /oauth2/authorization/{registrationId}
-				// (ví dụ: /oauth2/authorization/google) để khởi động flow OAuth2.
+				/*
+				 * Khi bạn thêm .oauth2Login(withDefaults()), Spring Security tự động tạo một endpoint /oauth2/authorization/{registrationId}
+				 * (ví dụ: /oauth2/authorization/google) để khởi động flow OAuth2.
+				 */
 				.oauth2Login(oauth2 -> oauth2
 						.loginPage("/login") // Chỉ định trang login tùy chỉnh làm trang bắt đầu
 						.successHandler(authenticationSuccessHandler)

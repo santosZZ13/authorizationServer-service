@@ -3,16 +3,16 @@ package org.authorizationserver.service.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.authorizationserver.dao.RoleDaoRepository;
 import org.authorizationserver.dao.UserDaoRepository;
 import org.authorizationserver.dto.RegisterDto;
-import org.authorizationserver.dto.UserDto;
+import org.authorizationserver.dto.UserInfoDto;
 import org.authorizationserver.enums.Provider;
-import org.authorizationserver.exception.PasswordNotMatchException;
-import org.authorizationserver.exception.RegistrationException;
-import org.authorizationserver.exception.UserAlreadyExistException;
-import org.authorizationserver.model.RoleModel;
+import org.authorizationserver.exception.*;
 import org.authorizationserver.model.UserModel;
+import org.authorizationserver.persistent.entity.UserEntity;
+import org.authorizationserver.persistent.entity.VerificationTokenEntity;
+import org.authorizationserver.persistent.repository.UserRepository;
+import org.authorizationserver.persistent.repository.VerificationTokenRepository;
 import org.authorizationserver.service.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,55 +24,59 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
+
 	private final UserDaoRepository userDaoRepository;
-	private final RoleDaoRepository roleDaoRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final VerificationTokenRepository verificationTokenRepository;
+	private final UserRepository userRepository;
+
 
 	@Override
-	public UserDto.Response getCurrentUser() {
+	public UserInfoDto.Response getCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
-//			return ResponseEntity
-//					.status(HttpStatus.UNAUTHORIZED)
-//					.body(Map.of("status", "error", "message", "Not authenticated"));
-			return null;
+		boolean isVerifiedUser = authentication != null && authentication.isAuthenticated()
+				&& !authentication.getPrincipal().equals("anonymousUser");
+
+		if (isVerifiedUser) {
+			String username;
+			Set<String> roles;
+
+			if (authentication instanceof JwtAuthenticationToken jwtAuth) {
+				// Xử lý khi xác thực bằng JWT (access_token từ cookie)
+				username = (String) jwtAuth.getTokenAttributes().get("username");
+				roles = ((Set<String>) jwtAuth.getTokenAttributes().get("authorities"));
+
+			} else if (authentication instanceof UsernamePasswordAuthenticationToken usernamePasswordAuth) {
+				// Xử lý khi xác thực bằng form login
+				UserDetails userDetails = (UserDetails) usernamePasswordAuth.getPrincipal();
+				username = userDetails.getUsername();
+				roles = userDetails.getAuthorities().stream()
+						.map(Object::toString)
+						.collect(Collectors.toSet());
+			} else {
+				// Nếu không phải loại Authentication mong muốn, trả về null hoặc lỗi
+				return null;
+			}
+
+			return UserInfoDto.Response.builder()
+					.data(UserInfoDto.ResponseData.builder()
+							.email(username)
+							.roles(roles)
+							.build())
+					.build();
 		}
-		String username;
-		Set<String> roles;
-
-		if (authentication instanceof JwtAuthenticationToken jwtAuth) {
-			// Xử lý khi xác thực bằng JWT (access_token từ cookie)
-			username = (String) jwtAuth.getTokenAttributes().get("username");
-			roles = ((Set<String>) jwtAuth.getTokenAttributes().get("authorities"));
-
-		} else if (authentication instanceof UsernamePasswordAuthenticationToken usernamePasswordAuth) {
-			// Xử lý khi xác thực bằng form login
-			UserDetails userDetails = (UserDetails) usernamePasswordAuth.getPrincipal();
-			username = userDetails.getUsername();
-			roles = userDetails.getAuthorities().stream()
-					.map(Object::toString)
-					.collect(Collectors.toSet());
-		} else {
-			// Nếu không phải loại Authentication mong muốn, trả về null hoặc lỗi
-			return null;
-		}
-
-		return UserDto.Response.builder()
-				.data(UserDto.ResponseData.builder()
-						.username(username)
-						.roles(roles)
-						.build())
-				.build();
+		throw new RuntimeException("TEST");
 	}
 
 	@Override
@@ -112,6 +116,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public void verifyCode(String email, String code) {
+		Optional<UserEntity> userEntityByEmail = userRepository.findByEmail(email);
+		if (userEntityByEmail.isEmpty()) {
+			throw new LoginException("User not found", "", "");
+		}
+		UserEntity userEntity = userEntityByEmail.get();
+		VerificationTokenEntity tokenEntity = verificationTokenRepository.findByToken(code);
+		UserEntity userEntityByToken = tokenEntity.getUser();
+		if (!userEntityByToken.equals(userEntity) || tokenEntity.getVerificationExpiry().isBefore(LocalDateTime.now())) {
+			throw new RegistrationException("Invalid or expired verification code", "", "");
+		}
+		userEntity.setActive(true);
+		userRepository.save(userEntity);
+//		verificationTokenRepository.delete(tokenEntity); // Xóa token sau khi xác nhận
+	}
+
+
 	private void validateBirthDate(RegisterDto.Request registerRequest) {
 		int month = registerRequest.getBirthMonth();
 		int day = registerRequest.getBirthDay();
@@ -143,3 +165,4 @@ public class UserServiceImpl implements UserService {
 				.build();
 	}
 }
+
