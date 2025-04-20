@@ -2,11 +2,11 @@ package org.authorizationserver.dao;
 
 import org.authorizationserver.model.UserModel;
 import org.authorizationserver.persistent.entity.UserEntity;
-import org.springframework.security.core.userdetails.User;
 
-public interface UserDaoRepository {
+public interface UserModelRepository {
 	UserModel findByEmail(String email);
+
 	void saveUserModel(UserModel userModel);
 
-	UserEntity toEntity(UserModel userModel);
+	void updateUserActiveStatus(String email, boolean active);
 }

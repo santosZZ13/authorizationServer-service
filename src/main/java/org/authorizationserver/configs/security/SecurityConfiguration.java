@@ -3,6 +3,7 @@ package org.authorizationserver.configs.security;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
+import org.authorizationserver.constants.SecurityConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,23 +34,17 @@ public class SecurityConfiguration {
 				.cors(cors -> cors.configurationSource(corsConfigurationSource))
 				.authorizeHttpRequests(
 						(authorizeRequests) -> authorizeRequests
-								.requestMatchers("/oauth2/**").permitAll()
-								.requestMatchers("/main.css").permitAll()
-								.requestMatchers("/login").permitAll()
-								.requestMatchers("/signup").permitAll()
-								.requestMatchers("/days-in-month").permitAll()
-								.requestMatchers("/api/login").permitAll() // Cho phép truy cập endpoint login
-								.requestMatchers("/client").permitAll()
-								.requestMatchers("/confirmCode").permitAll()
-								.requestMatchers("/error").authenticated()
-								.requestMatchers("/").authenticated()
+								.requestMatchers(SecurityConstants.PUBLIC_ENDPOINTS)
+								.permitAll()
+								.requestMatchers(SecurityConstants.AUTHENTICATION_ENDPOINTS)
+								.authenticated()
 								.anyRequest().authenticated())
 				.formLogin(formLogin -> formLogin
 								.loginPage("/login")
 								.permitAll()
 								.successHandler(authenticationSuccessHandler)
 //								.failureForwardUrl("/error")
-//						.failureHandler(authenticationFailureHandler)
+								.failureHandler(authenticationFailureHandler)
 				)
 				.logout(logout -> logout
 						.logoutUrl("/logout")
@@ -93,4 +88,5 @@ public class SecurityConfiguration {
 				}, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}
+
 }

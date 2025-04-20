@@ -14,10 +14,14 @@ public class StatusController {
 	private final UserService userService;
 
 
-	@GetMapping("/error")
-
-	public String error() {
+	@GetMapping("/notFoundError")
+	public String notFoundError() {
 		return "notFoundError";
+	}
+
+	@GetMapping("/error")
+	public String internalServerError() {
+		return "error";
 	}
 
 	@GetMapping("/")

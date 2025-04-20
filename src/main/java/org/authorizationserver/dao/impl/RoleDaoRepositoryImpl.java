@@ -1,6 +1,7 @@
-package org.authorizationserver.dao;
+package org.authorizationserver.dao.impl;
 
 import lombok.AllArgsConstructor;
+import org.authorizationserver.dao.RoleDaoRepository;
 import org.authorizationserver.model.RoleModel;
 import org.authorizationserver.persistent.entity.RoleEntity;
 import org.authorizationserver.persistent.repository.RoleRepository;

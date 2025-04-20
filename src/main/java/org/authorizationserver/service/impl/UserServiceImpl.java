@@ -3,14 +3,12 @@ package org.authorizationserver.service.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.authorizationserver.dao.UserDaoRepository;
+import org.authorizationserver.dao.UserModelRepository;
 import org.authorizationserver.dto.RegisterDto;
 import org.authorizationserver.dto.UserInfoDto;
 import org.authorizationserver.enums.Provider;
 import org.authorizationserver.exception.*;
 import org.authorizationserver.model.UserModel;
-import org.authorizationserver.persistent.entity.UserEntity;
-import org.authorizationserver.persistent.entity.VerificationTokenEntity;
 import org.authorizationserver.persistent.repository.UserRepository;
 import org.authorizationserver.persistent.repository.VerificationTokenRepository;
 import org.authorizationserver.service.UserService;
@@ -24,11 +22,9 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,7 +32,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-	private final UserDaoRepository userDaoRepository;
+	private final UserModelRepository userModelRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final VerificationTokenRepository verificationTokenRepository;
 	private final UserRepository userRepository;
@@ -89,13 +85,13 @@ public class UserServiceImpl implements UserService {
 			}
 
 			String email = registerRequest.getEmail();
-			UserModel userModelByEmail = userDaoRepository.findByEmail(email);
+			UserModel userModelByEmail = userModelRepository.findByEmail(email);
 			if (!Objects.equals(userModelByEmail, null)) {
 				throw new UserAlreadyExistException("User already exists", "", "");
 			}
 
 			UserModel userModel = toUserModel(registerRequest);
-			userDaoRepository.saveUserModel(userModel);
+			userModelRepository.saveUserModel(userModel);
 
 			Authentication auth = new UsernamePasswordAuthenticationToken(
 					registerRequest.getEmail(),
@@ -113,24 +109,6 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			throw new RegistrationException("An unexpected error occurred during registration", e.getMessage(), "");
 		}
-	}
-
-
-	@Override
-	public void verifyCode(String email, String code) {
-		Optional<UserEntity> userEntityByEmail = userRepository.findByEmail(email);
-		if (userEntityByEmail.isEmpty()) {
-			throw new LoginException("User not found", "", "");
-		}
-		UserEntity userEntity = userEntityByEmail.get();
-		VerificationTokenEntity tokenEntity = verificationTokenRepository.findByToken(code);
-		UserEntity userEntityByToken = tokenEntity.getUser();
-		if (!userEntityByToken.equals(userEntity) || tokenEntity.getVerificationExpiry().isBefore(LocalDateTime.now())) {
-			throw new RegistrationException("Invalid or expired verification code", "", "");
-		}
-		userEntity.setActive(true);
-		userRepository.save(userEntity);
-//		verificationTokenRepository.delete(tokenEntity); // Xóa token sau khi xác nhận
 	}
 
 

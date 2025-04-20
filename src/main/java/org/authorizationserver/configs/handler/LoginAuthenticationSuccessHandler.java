@@ -3,6 +3,7 @@ package org.authorizationserver.configs.handler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.authorizationserver.dao.EmailDaoRepository;
 import org.authorizationserver.exception.LoginException;
@@ -61,7 +62,11 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 					VerificationTokenEntity tokenEntity = new VerificationTokenEntity(otp, userEntity);
 					verificationTokenRepository.save(tokenEntity);
 					sendVerificationEmail(email, otp);
-					response.sendRedirect("/confirmCode?email=" + email);
+					// Lưu email vào session
+					HttpSession session = request.getSession();
+					session.setAttribute("verificationEmail", email);
+//					session.setAttribute("isOAuth2Flow", false); // Đây là form login
+					response.sendRedirect("/confirmCode");
 				} else {
 					this.delegate.onAuthenticationSuccess(request, response, authentication);
 				}

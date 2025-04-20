@@ -1,6 +1,7 @@
 package org.authorizationserver.exception.exceptionHandler;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.log4j.Log4j2;
 import org.authorizationserver.exception.ApiException;
 import org.authorizationserver.common.FieldErrorWrapper;
 import org.authorizationserver.common.GenericResponseErrorWrapper;
@@ -26,6 +27,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @ControllerAdvice
+@Log4j2
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler({Exception.class})

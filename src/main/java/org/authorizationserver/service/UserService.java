@@ -11,5 +11,4 @@ public interface UserService {
 	void registerUser(RegisterDto.Request registerRequestDto,
 					  HttpServletRequest request, HttpServletResponse response);
 
-	void verifyCode(String email, String code);
 }

@@ -1,5 +1,6 @@
-package org.authorizationserver.dao;
+package org.authorizationserver.dao.impl;
 
+import org.authorizationserver.dao.EmailDaoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

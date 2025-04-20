@@ -1,7 +1,7 @@
 package org.authorizationserver.configs.service;
 
 import lombok.AllArgsConstructor;
-import org.authorizationserver.dao.UserDaoRepository;
+import org.authorizationserver.dao.UserModelRepository;
 import org.authorizationserver.model.UserModel;
 import org.authorizationserver.configs.model.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +15,13 @@ import java.util.Objects;
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-	private final UserDaoRepository userDaoRepository;
+	private final UserModelRepository userModelRepository;
 
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserModel userModel = userDaoRepository.findByEmail(username);
+		UserModel userModel = userModelRepository.findByEmail(username);
 
 		if (Objects.isNull(userModel)) {
 			throw new UsernameNotFoundException("Unable to found user: " + username);
